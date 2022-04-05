@@ -626,6 +626,7 @@ def pipeline(filename,savepath):
 	return proc_lines
 
 if __name__ == "__main__":
+	print(__name__)
 	language = sys.argv[1]
 	source_path = Path(sys.argv[2])
 	output_path = Path(sys.argv[3])
