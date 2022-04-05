@@ -284,7 +284,8 @@ if __name__ == '__main__':
 	corpora_dir = Path(sys.argv[4])
 	wordlist = sys.argv[5].split()
 	yearlist = set()
-	for fname in os.listdir(corpora_dir):
+	filelist = os.listdir(corpora_dir)
+	for fname in filelist:
 		if fname.find('pkl') != -1:
 			yearlist.add(int(re.search('\d{4}',fname)[0]))
 	yearlist = sorted(yearlist)
