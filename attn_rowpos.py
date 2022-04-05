@@ -265,7 +265,7 @@ def get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path):
 	words_attnrowlabs144 = []
 	words_line_cnt = []
 	for word in wordlist:
-		print(f'Generating attention rows for word \"{word}\"')
+		print(f'Extracting attention rows for word \"{word}\"...')
 		oneword_attnrowlabs = get_word_attn_rowlabs(word,sent_len,corpus,sent_max)
 		words_attnrowlabs144.append(oneword_attnrowlabs)
 		word_line_cnt = oneword_attnrowlabs.shape[2]
