@@ -16,7 +16,7 @@ Statistics and visualizations of Linear-position-distribution:
 Extracting attention weights for words in sentences:
 * [PyTorch](https://pytorch.org/)
 * [Huggingface Transformers](https://huggingface.co/)
-
+* [Pandas](https://pandas.pydata.org/)
 
 
 ## Pre-processing Leipzig news corpora
