@@ -290,4 +290,4 @@ if __name__ == '__main__':
 	yearlist = sorted(yearlist)
 	print(yearlist)
 	corpora = corpora_loader(yearlist,f'{corpora_dir.joinpath(os.listdir(corpora_dir)[0])}')
-	res = diff_vwords_vlens_vyears(wordlist,start_len,end_len,corpora)
+	res = diff_vwords_vlens_vyears(wordlist,start_len,end_len,corpora,bandwidth)
