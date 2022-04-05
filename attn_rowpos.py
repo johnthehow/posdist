@@ -275,6 +275,7 @@ def get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path):
 	heads_attnrowlabs = torch.zeros(12,12,words_line_cnt_sum,sent_len+1)
 	for layer in range(12):
 		for head in range(12):
+			print(f'Processing layer-{layer} head-{head}...')
 			onehead_attnrowlabs = []
 			for attnrowlabs144 in words_attnrowlabs144:
 				onehead_attnrowlabs.append(attnrowlabs144[layer][head])
