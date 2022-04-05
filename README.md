@@ -23,7 +23,7 @@ We provide a script `corpus_prep.py` for pre-processing Leipzig news corpora. Th
 Corpora used in the paper can be downloaded from <https://wortschatz.uni-leipzig.de/en/download/>. Some neccessay steps are required before runing the pre-processing script: 
 
 1. Extract plain-text corpora (`<language>_news_<year>_1M-sentences.txt`) from compressed archives (`<language>_news_<year>_1M.tar.gz`). 
-2. Put extracted text files under same directory for further reference. 
+2. Put extracted text files under a same directory for further reference. 
 
 To get a corpus covering all years of collection, simply concatenate all extracted texts.
 
@@ -37,13 +37,13 @@ Sample usage:
 
 For each plain-text corpus text, following output files are produced by this script:
 
-`~/output/<language>_news_<year>_1M-sentences.pkl`: pre-processed text (Python object serialization)
+* `~/output/<language>_news_<year>_1M-sentences.pkl`: pre-processed text (Python object serialization)
 
-`~/output/<language>_news_<year>_1M-sentences_except.txt`: a list of illegal tokens excluded from pre-processed text
+* `~/output/<language>_news_<year>_1M-sentences_except.txt`: a list of illegal tokens excluded from pre-processed text
 
-`~/output/<language>_news_<year>_1M-sentences_pdoc.txt`: pre-processed text
+* `~/output/<language>_news_<year>_1M-sentences_pdoc.txt`: pre-processed text
 
-`~/output/<language>_news_<year>_1M-sentences_stats.txt`: a summary of the pre-processed text
+* `/output/<language>_news_<year>_1M-sentences_stats.txt`: a summary of the pre-processed text
 
 Only files named `<language>_news_<year>_1M-sentences.pkl` are used for further analysis.
 
