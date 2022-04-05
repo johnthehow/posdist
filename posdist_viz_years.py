@@ -6,6 +6,7 @@ __author__ = 'John Thehow'
 import warnings
 import re
 import os
+import sys
 import pickle
 import random
 import numpy
@@ -626,334 +627,65 @@ def draw_line_langs_sentlen_dists(lang_list,legends,pkl_path,save_path):
 	plt.savefig(save_path+'\\'+now)
 	return
 
-def 量化差异对比函数():
-	pass
-
-
-# 函数ID: 2022012025739
-# 依赖函数: 2022012030209
-# 同一单词, 不同句长 的 KDE平滑的 对齐到第一个句长的y轴上限的 位频分布曲线们 之间的 两两KL散度差异
-def diff_word_vlens(word,corpus_pkl,start_len,end_len,bandwidth):
-	'''bandwidth控制KDE曲线的平滑程度, 越大越平滑, 但是越失真, 一般取1\ninterval决定隔多少句长间隔画一次线'''
-	# 一个单词的KDE分布: 获得一个单词在不同句长的拉伸后KDE分布(density), 对齐到到第一个句长的高度
-	# 获得第一个句长的高度, 用于后边句长的对齐
-	first_log = posdist_word(word,corpus_pkl,start_len)['log']
-	first_kde = stats.gaussian_kde(first_log,bw_method=bandwidth)
-	first_xs = numpy.linspace(1,start_len,1000)
-	first_ys = first_kde(first_xs)
-	first_ys_max = first_ys.max()
-	
-	yss = []
-	# 对于每个句长, 计算
-	for sentlen in range(start_len,end_len+1,1):
-		# 获得数据
-		log = posdist_word(word,corpus_pkl,sentlen)['log']
-		# 作图
-		kde = stats.gaussian_kde(log,bw_method=bandwidth)
-		xs = numpy.linspace(1,sentlen,1000)
-		ys = kde(xs)
-		ys = ys * (first_ys_max/ys.max()) #对齐到第一个句长的高度
-		yss.append(ys)
-
-	# 获得两两对比的项
-	pairs = []
-	for i in range(len(yss)):
-		for j in range(len(yss)):
-			if i<j:
-				pairs.append((i,j))
-
-	# 两两对比后的KLD差异均值和标准差
-	klds = []
-	for pair in pairs:
-		kld = kl_div(yss[pair[0]],yss[pair[1]])
-		klds.append(kld.sum())
-	kldmean = sum(klds)/len(klds)
-	kldstd = numpy.std(klds)
-	return kldmean,kldstd
-
-
-
-# 函数ID: 2022012060613
-# 依赖函数: 2022012030209
-# 同一句长, 不同单词 的 KDE平滑 的 位频分布曲线们 之间的 两两KL散度差异
-def diff_len_vwords(wordlist,corpus_pkl,sent_length,start_len,end_len,bandwidth):
-	yss = []
-	for word in wordlist:
-		log = posdist_word(word,corpus_pkl,sent_length)['log']
-		kde = stats.gaussian_kde(log,bw_method=bandwidth)
-		xs = numpy.linspace(1,sent_length,1000)
-		ys = kde(xs)
-		yss.append(ys)
-	pairs = []
-	for i in range(len(yss)):
-		for j in range(len(yss)):
-			if i<j:
-				pairs.append((i,j))
-	klds = []
-	for p in pairs:
-		kld = kl_div(yss[p[0]],yss[p[1]])
-		klds.append(kld.sum())
-	kldmean = sum(klds)/len(klds)
-	kldstd = numpy.std(klds)
-	print(kldmean)
-	print(kldstd)
-	return kldmean,kldstd
-
-
-
-
-
-# 函数ID: 2022012061750
-# 依赖函数: 2022012030209
-# 函数功能: 同一单词, 同一句长, 不同年份之间的 位频分布KDE曲线 之间的 KL散度 差异
-def diff_word_len_vyears(word,sent_length,corpus_list,bandwidth):
-	yss = []
-	for corpus in corpus_list:
-		log = posdist_word(word,corpus,sent_length)['log']
-		kde = stats.gaussian_kde(log,bw_method=bandwidth)
-		xs = numpy.linspace(1,sent_length,1000)
-		ys = kde(xs)
-		yss.append(ys)
-	pairs = []
-	for i in range(len(yss)):
-		for j in range(len(yss)):
-			if i<j:
-				pairs.append((i,j))
-	klds = []
-	for p in pairs:
-		kld = kl_div(yss[p[0]],yss[p[1]])
-		klds.append(kld.sum())
-	kldmean = sum(klds)/len(klds)
-	kldstd = numpy.std(klds)
-	return kldmean,kldstd
-
-
-
-def 文中使用的量化差异对比函数():
-	pass
-
-
-# 函数ID: 2022012061510
-# 依赖函数: 2022012025739
-# 同一单词, 不同句长 的 KDE平滑的 对齐到第一个句长的y轴上限的 位频分布曲线们 之间的 两两KL散度差异
-def diff_vwords_vlens(wordlist,corpus_pkl,start_len,end_len,bandwidth):
-	word_kl_means = []
-	word_kl_stds = []
-	for word in wordlist:
-		print(f'{word}')
-		meanstd = diff_word_vlens(word,corpus_pkl,start_len,end_len,bandwidth)
-		word_kl_means.append(meanstd[0])
-		word_kl_stds.append(meanstd[1])
-		print(meanstd[0])
-		print(meanstd[1])
-	word_kl_means_mean = numpy.mean(word_kl_means)
-	word_kl_stds_mean = numpy.std(word_kl_stds)
-	return word_kl_means_mean, word_kl_stds_mean
-
-# 函数ID: 2022012060738
-# 依赖函数: 2022012060613
-# 同一句长, 不同单词 的 KDE平滑的 位频分布曲线们 之间的 两两KL散度差异 (扩展到所有句长)
-def diff_vlens_vwords(wordlist,corpus_pkl,start_len,end_len,bandwidth):
-	kl_means = []
-	kl_stds = []
-	for i in range(start_len,end_len+1):
-		meanstd = diff_len_vwords(wordlist,corpus_pkl,i,start_len,end_len,bandwidth)
-		kl_means.append(meanstd[0])
-		kl_stds.append(meanstd[1])
-	kl_mean_means = numpy.mean(kl_means)
-	kl_mean_stds = numpy.mean(kl_stds)
-	return kl_mean_means,kl_mean_stds
-
-# 函数ID: 2022012062321
-# 依赖函数: 2022012061750
-# 函数功能: 同一单词, 同一句长, 不同年份之间的 位频分布KDE曲线 之间的 KL散度 差异 (扩展至各单词, 各句长)
-def diff_vwords_vlens_vyears(wordlist,start_len,end_len,corpus_list,bandwidth):
-	kldmeans = []
-	kldstds = []
-	for word in wordlist:
-		for length in range(start_len,end_len+1):
-			kldmeanstd = diff_word_len_vyears(word,length,corpus_list,bandwidth)
-			kldmeans.append(kldmeanstd[0])
-			kldstds.append(kldmeanstd[1])
-	kldmeans_avg = numpy.mean(kldmeans)
-	kldstds_avg = numpy.mean(kldstds)
-	return kldmeans_avg,kldstds_avg
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def 弃用函数():
-	pass
-
-# 函数ID: 2022012063558
-# 依赖函数: 2022012030209
-# 函数功能: 计算放缩后的直方图的偏度和峰度, 并可视化为二维散点图
-def draw_scat_curve_skewkurt_vwords_vlens(words,corpus_pkl,start_len,end_len,bandwidth,interval):
-	'''words是字符串的列表\nbandwidth控制KDE曲线的平滑程度, 越大越平滑, 但是越失真, 一般取1\ninterval决定隔多少句长间隔画一次线'''
-	fig = plt.figure()
-	ax = fig.subplots()
-	for word in words:
-		skews = []
-		kurts = []
-		for i in range(start_len,end_len+1,interval):
-			# 获得数据
-			log = posdist_word(word,corpus_pkl,i)['log']
-			# 作图
-			kde = stats.gaussian_kde(log,bw_method=bandwidth)
-			xs = numpy.linspace(0,i,1000)
-			xscale = xs * (end_len/i)
-			ys = kde(xs)
-			ys = ys * (i/end_len)
-			print(len(ys))
-			skews.append(stats.skew(ys))
-			kurts.append(stats.kurtosis(ys))
-		ax.set_xlim(-1.5,1.5)
-		ax.set_ylim(-1.5,1.5)
-		ax.scatter(skews,kurts,facecolor=None,s=2)
-	plt.show()
-	return
-
-# 基于预计算分布的batch_diff_len_vwords
-def batch_diff_len_vwords_precount(wordlist,posdist_count,start_len,end_len,bandwidth):
-	def len_words(wordlist,posdist_count,start_len,sent_length,bandwidth):
-		yss = []
-		for word in wordlist:
-			first_log = posdist_count[start_len][word]
-			first_kde = stats.gaussian_kde(first_log,bw_method=bandwidth)
-			first_xs = numpy.linspace(1,start_len,1000)
-			first_ys = first_kde(first_xs)
-			first_ys_max = first_ys.max()
-
-			log = posdist_count[seng_length][word]
-			kde = stats.gaussian_kde(log,bw_method=bandwidth)
-			xs = numpy.linspace(1,sent_length,1000)
-			ys = kde(xs)
-			ys = ys * (first_ys_max/ys.max())
-			yss.append(ys)
-		pairs = []
-		for i in range(len(yss)):
-			for j in range(len(yss)):
-				if i<j:
-					pairs.append((i,j))
-		klds = []
-		for p in pairs:
-			kld = kl_div(yss[p[0]],yss[p[1]])
-			klds.append(kld.sum())
-		kldmean = sum(klds)/len(klds)
-		kldstd = numpy.std(klds)
-		return kldmean,kldstd
-
-	kl_means = []
-	kl_stds = []
-	for i in range(start_len,end_len+1):
-		meanstd = len_words(wordlist,posdist_count,start_len,i,bandwidth)
-		kl_means.append(meanstd[0])
-		kl_stds.append(meanstd[1])
-	kl_mean_means = numpy.mean(kl_means)
-	kl_mean_stds = numpy.mean(kl_stds)
-	return kl_mean_means,kl_mean_stds
-
-
-
-# diff_word_vlens的基于预计算结果的版本
-# 逻辑错误, 无法使用, log和fd_cnt在KDE上是不一样的
-def diff_word_vlens_precount(word,posdist_count,start_len,end_len,bandwidth):
-	# 获得第一个句长的高度, 用于后边句长的对齐
-	first_log = posdist_count[start_len][word]
-	first_kde = stats.gaussian_kde(first_log,bw_method=bandwidth)
-	first_xs = numpy.linspace(1,start_len,1000)
-	first_ys = first_kde(first_xs)
-	first_ys_max = first_ys.max()
-
-	yss = []
-	# 对于每个句长, 计算
-	for i in range(start_len,end_len+1,1):
-		# 获得数据
-		log = posdist_count[i][word]
-		# 作图
-		kde = stats.gaussian_kde(log,bw_method=bandwidth)
-		xs = numpy.linspace(1,i,1000)
-		ys = kde(xs)
-		ys = ys * (first_ys_max/ys.max()) #对齐到第一个句长的高度
-		yss.append(ys)
-	pairs = []
-	for i in range(len(yss)):
-		for j in range(len(yss)):
-			if i<j:
-				pairs.append((i,j))
-	klds = []
-	for p in pairs:
-		kld = kl_div(yss[p[0]],yss[p[1]])
-		klds.append(kld.sum())
-	kldmean = sum(klds)/len(klds)
-	kldstd = numpy.std(klds)
-	return kldmean,kldstd
-	
-
-
-
-
-
-
-
-
-
-# (相同句长, 不同单词)场景的平均KL散度均值, 和平均KL散度标准差, 单一句长
-def kl_len_words(wordlist,corpus_pkl,sent_length,start_len,end_len,bandwidth):
-	yss = []
-	for word in wordlist:
-		first_log = posdist_word(word,corpus_pkl,start_len)['log']
-		first_kde = stats.gaussian_kde(first_log,bw_method=bandwidth)
-		first_xs = numpy.linspace(1,start_len,1000)
-		first_ys = first_kde(first_xs)
-		first_ys_max = first_ys.max()
-		
-		log = posdist_word(word,corpus_pkl,sent_length)['log']
-		kde = stats.gaussian_kde(log,bw_method=bandwidth)
-		xs = numpy.linspace(1,sent_length,1000)
-		ys = kde(xs)
-		ys = ys * (first_ys_max/ys.max())
-		yss.append(ys)
-	pairs = []
-	for i in range(len(yss)):
-		for j in range(len(yss)):
-			if i<j:
-				pairs.append((i,j))
-	klds = []
-	for p in pairs:
-		kld = kl_div(yss[p[0]],yss[p[1]])
-		klds.append(kld.sum())
-	kldmean = sum(klds)/len(klds)
-	kldstd = numpy.std(klds)
-	return kldmean,kldstd
-
-
-
-
-
-
+if __name__ == '__main__':
+	sent_len = int(input('Sentence length: '))
+	corpora_dir_en = Path(input('Path for English corpora: '))
+	corpora_dir_de = Path(input('Path for German corpora: '))
+	corpora_dir_es = Path(input('Path for Spanish corpora: '))
+
+	filelist_en = os.listdir(corpora_dir_en)
+	filelist_de = os.listdir(corpora_dir_de)
+	filelist_es = os.listdir(corpora_dir_es)
+
+	yearlist_en = set()
+	yearlist_de = set()
+	yearlist_es = set()
+
+	for fname in filelist_en:
+		if fname.find('pkl') != -1:
+			yearlist_en.add(int(re.search('\d{4}',fname)[0]))
+	for fname in filelist_de:
+		if fname.find('pkl') != -1:
+			yearlist_de.add(int(re.search('\d{4}',fname)[0]))
+	for fname in filelist_es:
+		if fname.find('pkl') != -1:
+			yearlist_es.add(int(re.search('\d{4}',fname)[0]))
+
+	year_avail_en = sorted(yearlist_en)
+	year_avail_de = sorted(yearlist_de)
+	year_avail_es = sorted(yearlist_es)
+
+	print('Years available for English')
+	print(year_avail_en)
+	print('Years available for German')
+	print(year_avail_de)
+	print('Years available for Spanish')
+	print(year_avail_es)
+	print('\n')
+
+	year_avail = [year_avail_en,year_avail_de,year_avail_es]
+
+	year_selected_en = input('Enter four years among available years of English (separated with space): ').split()
+	year_selected_de = input('Enter four years among available years of German (separated with space): ').split()
+	year_selected_es = input('Enter four years among available years of Spanish (separated with space): ').split()
+
+	year_selected = [year_selected_en,year_selected_de,year_selected_es]
+
+	word_en = input('A English function word: ')
+	word_de = input('A German function word: ')
+	word_es = input('A Spanish function word: ')
+
+	words = [word_en, word_de, word_es]
+
+	title_en = f'{word_en} (English)'
+	title_de = f'{word_de} (German)'
+	title_es = f'{word_es} (Spanish)'
+
+	titles = [title_en,title_de,title_es]
+
+	corpora_en = corpora_loader(year_avail_en,f'{corpora_dir_en.joinpath(filelist_en[0])}')
+	corpora_de = corpora_loader(year_avail_de,f'{corpora_dir_de.joinpath(filelist_de[0])}')
+	corpora_es = corpora_loader(year_avail_es,f'{corpora_dir_es.joinpath(filelist_es[0])}')
+	corpora = [corpora_en,corpora_de,corpora_es]
+
+	draw_line_posdist_word_len_years_panels(3,1,sent_len,words,titles,corpora,year_selected,year_avail,'png')
