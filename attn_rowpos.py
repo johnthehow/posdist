@@ -1,5 +1,6 @@
-import torch
 import os
+import sys
+import torch
 from transformers import BertModel
 from transformers import BertTokenizer
 from transformers import logging
@@ -282,3 +283,11 @@ def get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path):
 			with open(filename,mode='wb') as pkl:
 				pickle.dump(onehead_attnrowlabs,pkl)
 	return heads_attnrowlabs
+
+if __name__ == '__main__':
+	sent_len = int(sys.argv[1])
+	sent_max = int(sys.argv[2])
+	corpus_path = Path(sys.argv[3])
+	save_path = Path(sys.argv[4])
+	word_list = sys.argv[5].split()
+	res = get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path)
