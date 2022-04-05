@@ -27,7 +27,7 @@ Corpora used in the paper can be downloaded from <https://wortschatz.uni-leipzig
 1. Extract plain-text corpora (`<language>_news_<year>_1M-sentences.txt`) from compressed archives (`<language>_news_<year>_1M.tar.gz`). 
 2. Put extracted text files under a same directory for further reference. 
 
-To get a corpus covering all years of collection, simply concatenate all extracted texts.
+To get a corpus covering all years of collection (which will be used in following analysis), simply concatenate all extracted texts.
 
 Corpus pre-preprocessing is run with:
 
