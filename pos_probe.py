@@ -132,9 +132,9 @@ def train_onehead_probe(dataset_path,layer,head,split_ratio,train_batch_size,tes
 	print(f'local majority baseline: {baseline}')
 	train_rec_file.write(f'local majority baseline: {baseline}')
 	train_rec_file.write('\n')
-	with open(f'{dataset_path.joinpath(f'baseline_{str(baseline)}')}', mode='w+') as f:
+	with open(dataset_path.joinpath(f'baseline_{baseline}'),mode='w+') as f:
 		pass
-	
+
 	# 数据拆分并载入dataloader
 	split_point = int(len(poss)*split_ratio)
 	train_datapairs = attnrowlabs[:len(poss)-split_point]
