@@ -397,11 +397,11 @@ def load_lepzig(filename):
 	print(f'Document length: {len(doc)} chars')
 
 	# 文档层: 替换乱码
-	print(f'Replacing gibberish in whole doc, 1st time...')
+	print(f'Replacing gibberish in document, 1st time...')
 	doc = replace_gibberish_doc(doc)
-	print(f'Replacing gibberish in whole doc, 2nd time...')
+	print(f'Replacing gibberish in document, 2nd time...')
 	doc = replace_gibberish_doc(doc)
-	print(f'Replacing gibberish in whole doc, 3rd time...')
+	print(f'Replacing gibberish in document, 3rd time...')
 	doc = replace_gibberish_doc(doc)
 	print(f'Document length after gibberish replaced: {len(doc)} chars')
 
@@ -627,12 +627,9 @@ def pipeline(filename,savepath):
 	return proc_lines
 
 if __name__ == "__main__":
-	print(__name__)
 	language = sys.argv[1]
 	source_path = Path(sys.argv[2])
 	output_path = Path(sys.argv[3])
-
-
 
 	if language == 'english':
 		BASIC_LATIN_LOWER = 'abcdefghijklmnopqrstuvwxyz'
