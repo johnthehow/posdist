@@ -397,13 +397,11 @@ def load_lepzig(filename):
 	print(f'Document length: {len(doc)} chars')
 
 	# 文档层: 替换乱码
-	print(f'Replacing gibberish in document, 1st time...')
+	print(f'Replacing gibberish...')
 	doc = replace_gibberish_doc(doc)
-	print(f'Replacing gibberish in document, 2nd time...')
 	doc = replace_gibberish_doc(doc)
-	print(f'Replacing gibberish in document, 3rd time...')
 	doc = replace_gibberish_doc(doc)
-	print(f'Document length after gibberish replaced: {len(doc)} chars')
+	print(f'Document length (gibberish replaced): {len(doc)} chars')
 
 	# 文档层: 分行
 	print(f'Splitting lines...')
@@ -411,7 +409,7 @@ def load_lepzig(filename):
 	
 	# 文档层: 删除分行造成的最后一行空行
 	strlines = strlines[:-1]
-	print(f'Total strlines {len(strlines)} lines')
+	print(f'No. of lines(as strings) {len(strlines)}')
 
 	# 句子层: 去除行号
 	print(f'Revmoing line numbers...')
@@ -420,16 +418,14 @@ def load_lepzig(filename):
 	# 句子层: 替换HTML字符实体
 	print(f'Replacing html entities...')
 	strlines = replace_html_char_entity(strlines)
-	print(f'Total lines after HTML replaced: {len(strlines)} lines')
+	print(f'No. of lines (HTML replaced): {len(strlines)} lines')
 
 	# 句子层: 替换乱码
-	print(f'Replacing gibberish after HTML replaced, 1st time...')
+	print(f'Replacing gibberish...')
 	strlines = replace_gibberish_strlines(strlines)
-	print(f'Replacing gibberish after HTML replaced, 2nd time...')
 	strlines = replace_gibberish_strlines(strlines)
-	print(f'Replacing gibberish after HTML replaced, 3rd time...')
 	strlines = replace_gibberish_strlines(strlines)
-	print(f'Document length after gibberish replaced: {len(" ".join(strlines))} chars')
+	print(f'Document length (gibberish replaced): {len(" ".join(strlines))} chars')
 
 	# 句子层: 替换非ASCII标点符号
 	print(f'Replacing non-ascii punctuations...')
@@ -445,9 +441,9 @@ def load_lepzig(filename):
 	strlines = remove_extra_space(strlines)
 	
 	# 句子层: 删除空行
-	print(f'Removing empty strlines...')
+	print(f'Removing empty lines (as strings)...')
 	strlines = remove_empty_strlines(strlines)
-	print(f'Total Lines after Empty Lines Removed {len(strlines)}')
+	print(f'No. of lines (empty lines removed) {len(strlines)}')
 
 	# 句子层: 空格分词
 	tklines = [line.split() for line in strlines]
