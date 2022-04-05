@@ -108,7 +108,7 @@ def train_onehead_probe(dataset_path,layer,head,split_ratio,train_batch_size,tes
 	head = int(head)
 	loss_fn = CrossEntropyLoss()
 	optimizer = SGD(model.parameters(),lr=learn_rate)
-	
+	print(f'Training layer-{layer:02d} head-{head:02d}...')
 
 	# 载入数据文件
 	with open(Path(dataset_path).joinpath(f'{layer:02d}_{head:02d}').joinpath('data').joinpath(f'attnrowlabs_{layer:02d}_{head:02d}.pkl'),mode='rb') as pkl:
@@ -132,8 +132,7 @@ def train_onehead_probe(dataset_path,layer,head,split_ratio,train_batch_size,tes
 	print(f'local majority baseline: {baseline}')
 	train_rec_file.write(f'local majority baseline: {baseline}')
 	train_rec_file.write('\n')
-	with open(dataset_path.joinpath(f'baseline_{baseline}'),mode='w+') as f:
-		pass
+
 
 	# 数据拆分并载入dataloader
 	split_point = int(len(poss)*split_ratio)
@@ -152,14 +151,19 @@ def train_onehead_probe(dataset_path,layer,head,split_ratio,train_batch_size,tes
 		train_res = train(train_dataloader, model, loss_fn, optimizer, report_interval,train_rec_file)
 		test_res = test(test_dataloader, model, loss_fn,train_rec_file)
 
+	with open(dataset_path.joinpath(f'baseline_{baseline}'),mode='w+') as f:
+		pass
+	# 保存该attention head的精度
+	with open(dataset_path.joinpath(accuracies.txt),mode='a+',encoding='utf-8') as f:
+		f.write('layer\thead\tacc\n')
+		f.write(f'{layer}\t{head}\t{test_res[acc]>0.8f}\n')
+
+
 	# 保存已训练模型路径
 	torch.save(model,Path(dataset_path).joinpath(f'{layer:02d}_{head:02d}').joinpath('res').joinpath(f'trained_mod_{layer:02d}_{head:02d}_acc_{test_res["acc"]:.6f}_{now}.pkl')) 
 
 	# 收尾
 	train_rec_file.close()
-	print(f'Train records and trained models saved at {dataset_path}')
-	print('Done!')
-
 	return
 
 # IDEL运行版代码
@@ -196,3 +200,5 @@ if __name__ == '__main__':
 		for line in accuracies:
 			txt.write(line)
 			txt.write('\n')
+	print(f'Train records and trained models saved at {dataset_path}')
+	print('Done!')
