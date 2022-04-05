@@ -409,14 +409,14 @@ def load_lepzig(filename):
 	
 	# 文档层: 删除分行造成的最后一行空行
 	strlines = strlines[:-1]
-	print(f'No. of lines(as strings) {len(strlines)}')
+	print(f'No. of lines (as strings) {len(strlines)}')
 
 	# 句子层: 去除行号
 	print(f'Revmoing line numbers...')
 	strlines = [re.sub('^\d+\t','',line) for line in strlines]
 
 	# 句子层: 替换HTML字符实体
-	print(f'Replacing html entities...')
+	print(f'Replacing HTML entities...')
 	strlines = replace_html_char_entity(strlines)
 	print(f'No. of lines (HTML replaced): {len(strlines)} lines')
 
@@ -588,7 +588,7 @@ def pipeline(filename,savepath):
 	proc_lines = remove_empty_tklines(proc_lines)
 	print(f"====================SUMMARY({LANG})====================")
 	stat = stats(proc_lines)
-	print(f"====================SAVING({LANG})====================")
+	print(f"====================SAVE({LANG})====================")
 	try:
 		with open(f'{savepathpobj.joinpath(filenamepobj.stem)}.pkl',mode='wb') as save_pkl:
 			pickle.dump(proc_lines,save_pkl)
