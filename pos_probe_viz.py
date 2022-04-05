@@ -24,5 +24,5 @@ if __name__ == '__main__':
 	plt.text(4,baseline-0.034,f'local majority baseline: {baseline}')
 	plt.legend()
 	now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-	plt.savefig(save_path.joinpath(f'probe_acc_{now}.png'),format='png')
-	print(f'Plot saved as {save_path.joinpath(now)}.png')
+	plt.savefig(acc_path.joinpath(f'probe_acc_{now}.png'),format='png')
+	print(f'Plot saved as {acc_path.joinpath(now)}.png')
