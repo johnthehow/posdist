@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 import pandas as pd
 import matplotlib.pyplot as plt
+import datetime
 
 
 
@@ -22,3 +23,6 @@ if __name__ == '__main__':
 	plt.plot([1,12],[baseline,baseline],color='k',ls='--',linewidth=1)
 	plt.text(4,baseline-0.034,f'local majority baseline: {baseline}')
 	plt.legend()
+	now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+	plt.savefig(save_path.joinpath(f'probe_acc_{now}.png',format='png')
+	print(f'Plot saved as {save_path.joinpath(now)}.png')
