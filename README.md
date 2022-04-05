@@ -49,7 +49,9 @@ Only files named `<language>_news_<year>_1M-sentences.pkl` are used for further 
 
 ## Statistics and visualizations of linear-position-distribution
 ![Mean D_{KL_{lengths}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Blengths%7D%7D) is computed by `posdist_stat_lengths.py`
+
 usage:
+
 `~/posdist_stat_lengths <start-sentence-length> <end-sentence-length> <KDE-bandwidth> <corpus-dir> <word-list>`
 
 `pos_dist.py` produces the descriptive statistics and visualizations of the paper. 
