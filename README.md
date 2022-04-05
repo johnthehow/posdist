@@ -76,4 +76,9 @@ Usage:
 `posdist_viz_meaning.py` produces the figure exhibiting "pattern consistency for words of similar meanings" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 3. of the paper).
 
 ## Extracting attention weights for words in sentences
+Run `attn_rowpos.py` to get the attention weights and linear postions corresponding to words in sentences.
+
+Usage:
+
+`python attn_rowpos.py <sentence-length> <maximum-sentences-for-each-word> <corpus-path> <output-path>`
 
