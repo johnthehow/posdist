@@ -229,6 +229,7 @@ def get_word_attn_rowlabs(word,sent_len,corpus,sent_max):
 		word_pos.append(word_row_num)
 		for layer in range(12):
 			for head in range(12):
+				print(f'Extracting attention rows of layer-{layer:02d} head-{head:02d}...')
 				attn_trimmed = attn_matrix_trim_scale(sent_attn_144[layer][head])
 				attn_dense = attn_matrix_denser(idmap_dict,attn_trimmed)
 				attn_row = attn_dense[word_row_num].detach()
@@ -264,18 +265,18 @@ def get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path):
 	words_attnrowlabs144 = []
 	words_line_cnt = []
 	for word in wordlist:
+		print(f'Generating attention rows for word \"{word}\"')
 		oneword_attnrowlabs = get_word_attn_rowlabs(word,sent_len,corpus,sent_max)
 		words_attnrowlabs144.append(oneword_attnrowlabs)
 		word_line_cnt = oneword_attnrowlabs.shape[2]
 		words_line_cnt.append(word_line_cnt)
-		print(f'Attention weights and position for word {word} in {word_line_cnt} length-{sent_len} sentences acquired.')
+		print(f'Attention weights and position for word {word} in {word_line_cnt} length-{sent_len} sentences')
 
 	# 创建结果容器
 	words_line_cnt_sum = sum(words_line_cnt)
 	heads_attnrowlabs = torch.zeros(12,12,words_line_cnt_sum,sent_len+1)
 	for layer in range(12):
 		for head in range(12):
-			print(f'Processing layer-{layer:02d} head-{head:02d}...')
 			onehead_attnrowlabs = []
 			for attnrowlabs144 in words_attnrowlabs144:
 				onehead_attnrowlabs.append(attnrowlabs144[layer][head])
@@ -294,7 +295,9 @@ if __name__ == '__main__':
 	corpus_path = Path(sys.argv[3])
 	save_path = Path(sys.argv[4])
 	wordlist = sys.argv[5].split()
+	print('Loading BERT...')
 	print('Loading corpus...')
 	with open(corpus_path, mode='rb') as pkl:
 		corpus = pickle.load(pkl)
+	print('Producing attention rows...')
 	res = get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path)
