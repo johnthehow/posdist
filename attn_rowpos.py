@@ -275,7 +275,7 @@ def get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path):
 	heads_attnrowlabs = torch.zeros(12,12,words_line_cnt_sum,sent_len+1)
 	for layer in range(12):
 		for head in range(12):
-			print(f'Processing layer-{layer} head-{head}...')
+			print(f'Processing layer-{layer:02d} head-{head:02d}...')
 			onehead_attnrowlabs = []
 			for attnrowlabs144 in words_attnrowlabs144:
 				onehead_attnrowlabs.append(attnrowlabs144[layer][head])
@@ -285,6 +285,7 @@ def get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path):
 			os.makedirs(Path(save_path).joinpath(f'{layer+1:02d}_{head+1:02d}').joinpath('data'),exist_ok=False)
 			with open(filename,mode='wb') as pkl:
 				pickle.dump(onehead_attnrowlabs,pkl)
+	print(f'Attention rows saved at {save_path} ')
 	return heads_attnrowlabs
 
 if __name__ == '__main__':
