@@ -99,6 +99,9 @@ Usage:
 
 `python pos_probe.py <train/test-split> <batch-size> <epochs> <learning-rate> <dataset-path>` 
 
+Sample usage:
+
+`python pos_probe.py 0.3 32 200 1e-3 ~/output/`
 
 
 
