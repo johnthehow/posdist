@@ -172,8 +172,11 @@ def train_onehead_probe(dataset_path,layer,head,split_ratio,train_batch_size,tes
 
 
 if __name__ == '__main__':
-	layer = int(sys.argv[1])
-	head = int(sys.argv[2])
+	split = float(sys.argv[1])
+	batch = int(sys.argv[2])
 	epochs = int(sys.argv[3])
-	dataset_path = Path(sys.argv[4])
-	train_onehead_probe(dataset_path,layer,head,0.3,32,32,200,epochs,1e-3)
+	learn_rate = float(sys.argv[4])
+	dataset_path = Path(sys.argv[5])
+	for lay in range(1,13):
+		for hd in range(1)
+	train_onehead_probe(dataset_path,layer,head,split,batch,batch,200,epochs,learn_rate)
