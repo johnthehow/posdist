@@ -3,6 +3,8 @@ This repository contains code for 'Emergent linguistic regularities learned by n
 It includes code for 功能1, 功能2(对应文中位置), ...
 
 ## Requirements
+All scirpts in this repo require Python 3.6+
+
 For pre-processing Leipzig news corpora:
 * [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
 
