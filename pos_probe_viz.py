@@ -23,7 +23,7 @@ if __name__ == '__main__':
 		layer_means.append(acc[acc.layer==i].mean().acc)
 	axe.plot(range(1,13),layer_means,marker='^',label='layer mean accuracy')
 	axe.plot([1,12],[baseline,baseline],color='k',ls='--',linewidth=1)
-	axe.text(4,baseline-0.034,f'local majority baseline: {baseline}')
+	axe.text(3.5,baseline-0.034,f'local majority baseline: {baseline}')
 	plt.legend()
 	now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 	plt.savefig(acc_path.joinpath(f'probe_acc_{now}.png'),format='png')
