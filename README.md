@@ -45,7 +45,7 @@ For each plain-text corpus text, following output files are produced by this scr
 
 `<language>_news_<year>_1M-sentences_stats.txt`: a summary of the pre-processed text
 
-
+Only files named `<language>_news_<year>_1M-sentences.pkl` are used for further analysis.
 
 ## Statistics and visualizations of linear-position-distribution
 
