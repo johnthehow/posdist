@@ -269,7 +269,7 @@ def get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path):
 		words_attnrowlabs144.append(oneword_attnrowlabs)
 		word_line_cnt = oneword_attnrowlabs.shape[2]
 		words_line_cnt.append(word_line_cnt)
-		print(f'Attention weights and position for word {word} in {word_line_cnt} length-{sent_len} sentences')
+		print(f'Attention weights and position extracted for word {word} in {word_line_cnt} length-{sent_len} sentences')
 
 	# 创建结果容器
 	words_line_cnt_sum = sum(words_line_cnt)
@@ -285,18 +285,18 @@ def get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path):
 			os.makedirs(Path(save_path).joinpath(f'{layer+1:02d}_{head+1:02d}').joinpath('data'),exist_ok=False)
 			with open(filename,mode='wb') as pkl:
 				pickle.dump(onehead_attnrowlabs,pkl)
-	print(f'Attention rows saved at {save_path} ')
+	print(f'Attention rows and positions saved at {save_path} ')
 	return heads_attnrowlabs
 
 if __name__ == '__main__':
+	print('Loading BERT...')
 	sent_len = int(sys.argv[1])
 	sent_max = int(sys.argv[2])
 	corpus_path = Path(sys.argv[3])
 	save_path = Path(sys.argv[4])
 	wordlist = sys.argv[5].split()
-	print('Loading BERT...')
 	print('Loading corpus...')
 	with open(corpus_path, mode='rb') as pkl:
 		corpus = pickle.load(pkl)
-	print('Producing attention rows...')
+	print('Extracting attention rows...')
 	res = get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path)
