@@ -48,6 +48,7 @@ For each plain-text corpus text, following output files are produced by this scr
 Only files named `<language>_news_<year>_1M-sentences.pkl` are used for further analysis.
 
 ## Statistics and visualizations of linear-position-distribution
+### Descriptive statistics (see Table 2 of the paper)
 ![Mean D_{KL_{lengths}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Blengths%7D%7D) is computed by `posdist_stat_lengths.py`
 
 Usage:
