@@ -9,7 +9,7 @@ import datetime
 
 if __name__ == '__main__':
 	acc_path = Path(sys.argv[1])
-	acc = pd.read_csv(acc_path,sep='\t')
+	acc = pd.read_csv(acc_path.joinpath('accuracies.txt'),sep='\t')
 	filelist = os.listdir(acc_path)
 	for fname in filelist:
 		if fname.find('baseline_') != -1:
