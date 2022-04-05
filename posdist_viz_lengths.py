@@ -224,16 +224,16 @@ if __name__ == '__main__':
 	titles = [f'{word_en} (English)', f'{word_de} (German)', f'{word_fr} (French)', f'{word_es} (Spanish)', f'{word_ru} (Russian)', f'{word_cz} (Czech)']
 
 	corpus_path_en = Path(input('Path for English concatenated corpus: '))
-	corpus_en = corpus_loader(corpus_path_en)
 	corpus_path_de = Path(input('Path for German concatenated corpus: '))
-	corpus_de = corpus_loader(corpus_path_de)
 	corpus_path_fr = Path(input('Path for French concatenated corpus: '))
-	corpus_fr = corpus_loader(corpus_path_fr)
 	corpus_path_es = Path(input('Path for Spanish concatenated corpus: '))
-	corpus_es = corpus_loader(corpus_path_es)
 	corpus_path_ru = Path(input('Path for Russian concatenated corpus: '))
-	corpus_ru = corpus_loader(corpus_path_ru)
 	corpus_path_cz = Path(input('Path for Czech concatenated corpus: '))
+	corpus_en = corpus_loader(corpus_path_en)
+	corpus_de = corpus_loader(corpus_path_de)
+	corpus_fr = corpus_loader(corpus_path_fr)
+	corpus_es = corpus_loader(corpus_path_es)
+	corpus_ru = corpus_loader(corpus_path_ru)
 	corpus_cz = corpus_loader(corpus_path_cz)
 
 	pdd_en = precalc_posdist_vwords_vlens_fd_density(word_en,corpus_en,12,37)
