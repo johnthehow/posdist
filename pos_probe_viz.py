@@ -16,12 +16,14 @@ if __name__ == '__main__':
 			baseline = float(fname[10:])
 
 	layer_means = []
+	fig = plt.figure(dpi=300)
+	axe = fig.subplots()
 	for i in range(1,13):
-		plt.scatter(acc[acc.layer==i].layer,acc[acc.layer==i].acc,s=12)
+		axe.scatter(acc[acc.layer==i].layer,acc[acc.layer==i].acc,s=12)
 		layer_means.append(acc[acc.layer==i].mean().acc)
-	plt.plot(range(1,13),layer_means,marker='^',label='layer mean accuracy')
-	plt.plot([1,12],[baseline,baseline],color='k',ls='--',linewidth=1)
-	plt.text(4,baseline-0.034,f'local majority baseline: {baseline}')
+	axe.plot(range(1,13),layer_means,marker='^',label='layer mean accuracy')
+	axe.plot([1,12],[baseline,baseline],color='k',ls='--',linewidth=1)
+	axe.text(4,baseline-0.034,f'local majority baseline: {baseline}')
 	plt.legend()
 	now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 	plt.savefig(acc_path.joinpath(f'probe_acc_{now}.png'),format='png')
