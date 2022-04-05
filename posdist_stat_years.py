@@ -289,5 +289,5 @@ if __name__ == '__main__':
 			yearlist.add(int(re.search('\d{4}',fname)[0]))
 	yearlist = sorted(yearlist)
 	print(yearlist)
-	corpora = corpora_loader(yearlist,corpora_dir)
+	corpora = corpora_loader(yearlist,f'{corpora_dir}.joinpath(os.listdir(corpora_dir)[0])')
 	res = diff_vwords_vlens_vyears(wordlist,start_len,end_len,corpus)
