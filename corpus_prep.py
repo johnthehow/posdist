@@ -4,7 +4,6 @@
 import re
 import os
 import sys
-import tarfile
 import string
 import pickle
 from pathlib import Path
@@ -630,13 +629,9 @@ if __name__ == "__main__":
 	language = sys.argv[1]
 	source_path = Path(sys.argv[2])
 	output_path = Path(sys.argv[3])
-	for archive in os.listdir(source_path):
-		print(f'decompressing {archive} ...')
-		zip_archive = tarfile.open(source_path.joinpath(archive))
-		for txt_archive in zip_archive.getnames():
-			if txt_archive.find('sentences') != -1:
-				txt_sentences = txt_archive
-				zip_archive.extract(txt_sentences,output_path)
+	for txt in os.listdir(source_path):
+		pipeline(f'{source_path.joinpath(txt)}',output_path)
+
 
 
 	if language == 'english':
