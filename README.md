@@ -18,7 +18,7 @@ Extracting attention weights for words in sentences:
 
 
 ## Pre-processing Leipzig news corpora
-We provide a script `corpus_prep.py` for pre-processing Leipzig news corpora. This script is capable of cleaning news texts in six languages (English, German, French, Spanish, Russian, Czech) from [Leipzig Corpora Collection](https://corpora.uni-leipzig.de/).
+We provide a script `corpus_prep.py` for pre-processing Leipzig news corpora. This script is capable of cleaning news texts in six languages (English, German, French, Spanish, Russian and Czech) from [Leipzig Corpora Collection](https://corpora.uni-leipzig.de/).
 
 Corpora used in the paper can be downloaded from <https://wortschatz.uni-leipzig.de/en/download/>. Some neccessay steps are required before runing the pre-processing script: 
 
@@ -48,6 +48,7 @@ For each plain-text corpus text, following output files are produced by this scr
 Only files named `<language>_news_<year>_1M-sentences.pkl` are used for further analysis.
 
 ## Statistics and visualizations of linear-position-distribution
+`pos_dist.py` computes the $D_{KL_{lengths}}$
 
 ## Extracting attention weights for words in sentences
 
