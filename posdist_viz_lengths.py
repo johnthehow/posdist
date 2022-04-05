@@ -190,7 +190,7 @@ def 文中直接使用的绘图函数():
 # words = ['of','als','avec','este','по','ale']
 # titles = ['of (English)','als (German)','avec (French)','este (Spanish)','по (Russian)','ale (Czech)']
 # 示例用法: draw_line_posdist_word_vlens_precalc_panels(3,2,words,titles,pdds)
-def draw_line_posdist_word_vlens_precalc_panels(rows,cols,words,titles,posdist_density_databases):
+def draw_line_posdist_word_vlens_precalc_panels(rows,cols,words,titles,posdist_density_databases,save_path):
 	markerstyle = ['+','x','D','s','o','^','v']
 	fig = plt.figure(figsize=(15,16),dpi=300)
 	axes = fig.subplots(rows,cols).flatten()
@@ -209,7 +209,8 @@ def draw_line_posdist_word_vlens_precalc_panels(rows,cols,words,titles,posdist_d
 		axes[i].legend(title = 'Sent Len')
 	# plt.show()
 	now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-	plt.savefig(f'D:/{now}.png',format='png')
+	plt.savefig(f'{save_path.joinpath(now)}.png',format='png')
+	print(f'Plot saved as {save_path.joinpath(now)}.png')
 	return
 
 if __name__ == '__main__':
@@ -229,6 +230,9 @@ if __name__ == '__main__':
 	corpus_path_es = Path(input('Path for Spanish concatenated corpus: '))
 	corpus_path_ru = Path(input('Path for Russian concatenated corpus: '))
 	corpus_path_cz = Path(input('Path for Czech concatenated corpus: '))
+
+	save_path = Path(input('Path for result image: '))
+
 	corpus_en = corpus_loader(corpus_path_en)
 	corpus_de = corpus_loader(corpus_path_de)
 	corpus_fr = corpus_loader(corpus_path_fr)
@@ -236,12 +240,12 @@ if __name__ == '__main__':
 	corpus_ru = corpus_loader(corpus_path_ru)
 	corpus_cz = corpus_loader(corpus_path_cz)
 
-	pdd_en = precalc_posdist_vwords_vlens_fd_density(word_en,corpus_en,12,37)
-	pdd_de = precalc_posdist_vwords_vlens_fd_density(word_de,corpus_de,12,37)
-	pdd_fr = precalc_posdist_vwords_vlens_fd_density(word_fr,corpus_fr,12,37)
-	pdd_es = precalc_posdist_vwords_vlens_fd_density(word_es,corpus_es,12,37)
-	pdd_ru = precalc_posdist_vwords_vlens_fd_density(word_ru,corpus_ru,12,37)
-	pdd_cz = precalc_posdist_vwords_vlens_fd_density(word_cz,corpus_cz,12,37)
+	pdd_en = precalc_posdist_vwords_vlens_fd_density([word_en],corpus_en,12,37)
+	pdd_de = precalc_posdist_vwords_vlens_fd_density([word_de],corpus_de,12,37)
+	pdd_fr = precalc_posdist_vwords_vlens_fd_density([word_fr],corpus_fr,12,37)
+	pdd_es = precalc_posdist_vwords_vlens_fd_density([word_es],corpus_es,12,37)
+	pdd_ru = precalc_posdist_vwords_vlens_fd_density([word_ru],corpus_ru,12,37)
+	pdd_cz = precalc_posdist_vwords_vlens_fd_density([word_cz],corpus_cz,12,37)
 
 	posdist_density_databases = [pdd_en, pdd_de, pdd_fr, pdd_es, pdd_ru, pdd_cz]
-	draw_line_posdist_word_vlens_precalc_panels(3,2,words,titles,posdist_density_databases)
+	draw_line_posdist_word_vlens_precalc_panels(3,2,words,titles,posdist_density_databases,save_path)
