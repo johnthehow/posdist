@@ -409,7 +409,7 @@ def load_leipzig(filename):
 	
 	# 文档层: 删除分行造成的最后一行空行
 	strlines = strlines[:-1]
-	print(f'No. of lines (as strings) {len(strlines)}' lines)
+	print(f'No. of lines (as strings) {len(strlines)} lines')
 
 	# 句子层: 去除行号
 	print(f'Revmoing line numbers...')
