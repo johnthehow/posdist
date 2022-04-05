@@ -160,11 +160,11 @@ if __name__ == '__main__':
 
 	year_avail = [year_avail_en,year_avail_de,year_avail_es]
 
-	year_selected_en = input('Enter four years among available years of English (separated with space): ').split()
+	year_selected_en = input('Enter four years among available years of English (separated by space): ').split()
 	year_selected_en = [int(i) for i in year_selected_en]
-	year_selected_de = input('Enter four years among available years of German (separated with space): ').split()
+	year_selected_de = input('Enter four years among available years of German (separated by space): ').split()
 	year_selected_de = [int(i) for i in year_selected_de]
-	year_selected_es = input('Enter four years among available years of Spanish (separated with space): ').split()
+	year_selected_es = input('Enter four years among available years of Spanish (separated by space): ').split()
 	year_selected_es = [int(i) for i in year_selected_es]
 
 	year_selected = [year_selected_en,year_selected_de,year_selected_es]

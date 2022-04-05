@@ -214,5 +214,34 @@ def draw_line_posdist_word_vlens_precalc_panels(rows,cols,words,titles,posdist_d
 
 if __name__ == '__main__':
 
-	posdist_density_databases = precalc_posdist_vwords_vlens_fd_density(wordlist,corpus,12,37)
-	draw_line_posdist_word_vlens_precalc_panels(rows,cols,words,titles,posdist_density_databases)
+	word_en = input('English word: ')
+	word_de = input('German word: ')
+	word_fr = input('French word: ')
+	word_es = input('Spanish word: ')
+	word_ru = input('Russian word: ')
+	word_cz = input('Czech word: ')
+	words = [word_en, word_de, word_fr, word_es, word_ru, word_cz]
+	titles = [f'{word_en} (English)', f'{word_de} (German)', f'{word_fr} (French)', f'{word_es} (Spanish)', f'{word_ru} (Russian)', f'{word_cz} (Czech)']
+
+	corpus_path_en = Path(input('Path for English concatenated corpus: '))
+	corpus_en = corpus_loader(corpus_path_en)
+	corpus_path_de = Path(input('Path for German concatenated corpus: '))
+	corpus_de = corpus_loader(corpus_path_de)
+	corpus_path_fr = Path(input('Path for French concatenated corpus: '))
+	corpus_fr = corpus_loader(corpus_path_fr)
+	corpus_path_es = Path(input('Path for Spanish concatenated corpus: '))
+	corpus_es = corpus_loader(corpus_path_es)
+	corpus_path_ru = Path(input('Path for Russian concatenated corpus: '))
+	corpus_ru = corpus_loader(corpus_path_ru)
+	corpus_path_cz = Path(input('Path for Czech concatenated corpus: '))
+	corpus_cz = corpus_loader(corpus_path_cz)
+
+	pdd_en = precalc_posdist_vwords_vlens_fd_density(word_en,corpus_en,12,37)
+	pdd_de = precalc_posdist_vwords_vlens_fd_density(word_de,corpus_de,12,37)
+	pdd_fr = precalc_posdist_vwords_vlens_fd_density(word_fr,corpus_fr,12,37)
+	pdd_es = precalc_posdist_vwords_vlens_fd_density(word_es,corpus_es,12,37)
+	pdd_ru = precalc_posdist_vwords_vlens_fd_density(word_ru,corpus_ru,12,37)
+	pdd_cz = precalc_posdist_vwords_vlens_fd_density(word_cz,corpus_cz,12,37)
+
+	posdist_density_databases = [pdd_en, pdd_de, pdd_fr, pdd_es, pdd_ru, pdd_cz]
+	draw_line_posdist_word_vlens_precalc_panels(3,2,words,titles,posdist_density_databases)
