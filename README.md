@@ -78,10 +78,15 @@ Usage:
 `posdist_viz_meaning.py` produces the figure exhibiting "pattern consistency for words of similar meanings" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 3. of the paper).
 
 ## Extracting attention weights for words in sentences
-Run `attn_rowpos.py` to get the attention weights and linear postions corresponding to words in sentences. For one word in a sentence, BERT generate 12×12 attention rows. This script put generated attention rows and position labs in separated directories (named after layer and head number)
+Run `attn_rowpos.py` to get the attention weights and linear postions corresponding to words in sentences. For one word in a sentence, BERT generate 12×12 attention rows. This script put generated attention rows and position labs in separated directories (named after layer and head number):
+
+```language
+
+```
 
 
 Usage:
 
 `python attn_rowpos.py <sentence-length> <maximum-sentences-for-each-word> <corpus-path> <output-path> <words>`
+
 
