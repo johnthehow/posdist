@@ -286,7 +286,7 @@ if __name__ == '__main__':
 	yearlist = set()
 	for fname in os.listdir(corpora_dir):
 		if fname.find('pkl') != -1:
-			yearlist.add(re.search('\d{4}',f)[0])
+			yearlist.add(re.search('\d{4}',fname)[0])
 	yearlist = sorted(yearlist)
 	print(yearlist)
 	corpora = corpora_loader(yearlist,corpora_dir)
