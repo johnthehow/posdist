@@ -4,16 +4,16 @@ It includes code for 功能1, 功能2(对应文中位置), ...
 
 ## Requirements
 For pre-processing Leipzig news corpora:
-* [BeautifulSoup]
+* [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
 
 Statistics and visualizations of Linear-position-distribution:
-* [Numpy]
-* [SciPy]
-* [MatplotLib]
+* [Numpy](http://www.numpy.org/)
+* [SciPy](https://scipy.org/)
+* [MatplotLib](https://matplotlib.org/)
 
 Extracting attention weights for words in sentences:
-* [PyTorch]
-* [Huggingface Transformers]
+* [PyTorch](https://pytorch.org/)
+* [Huggingface Transformers](https://huggingface.co/)
 
 
 
