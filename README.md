@@ -68,6 +68,12 @@ Usage:
 
 `python posdist_stat_years.py  <start-sentence-length> <end-sentence-length> <KDE-bandwidth> <corpus-dir> <word-list>`
 
+### Visualizations
+`posdist_viz_lengths.py` produces the figure showing "pattern consistency over sentence lengths" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 1. of the paper).
+
+`posdist_viz_years.py` produces the figure demonstrating "pattern consistency over year-of-collection" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 2. of the paper).
+
+`posdist_viz_meaning.py` produces the figure exhibiting "pattern consistency for words of similar meanings" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 3. of the paper).
 
 ## Extracting attention weights for words in sentences
 
