@@ -36,7 +36,6 @@ LEGAL_CHAR = LEGAL_ABC + LEGAL_PUNCT + LEGAL_DIGIT
 
 
 
-
 # 在整个文本中替换乱码
 def replace_gibberish_doc(doc):
 	hex_map = GIBBERISH_TABLE

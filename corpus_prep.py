@@ -86,7 +86,7 @@ def remove_empty_tklines(tklines):
 			res.append(line)
 		else:
 			empty_line_cnt += 1
-	print(f'{PRINT_TITLE}: {empty_line_cnt} Empty Lines Removed')
+	print(f'{empty_line_cnt} Empty Lines Removed')
 	return res
 
 # 判断一个token是否含有非法字符
@@ -391,63 +391,63 @@ def lower_token(tklines):
 # 包含总体规划中的 文档层 和 句子层
 def load_lepzig(filename):
 	# 文件层: 打开文件
-	print(f'{PRINT_TITLE}>>>load_lepzig: Loading Lepzig sentences...')
+	print(f'Loading Lepzig sentences...')
 	with open(filename,mode='r',encoding='utf-8') as lpzfile:
 		doc = lpzfile.read()
-	print(f'{PRINT_TITLE}>>>load_lepzig: Document length: {len(doc)} chars')
+	print(f'Document length: {len(doc)} chars')
 
 	# 文档层: 替换乱码
-	print(f'{PRINT_TITLE}>>>load_lepzig: Replacing gibberish in whole doc, 1st time...')
+	print(f'Replacing gibberish in whole doc, 1st time...')
 	doc = replace_gibberish_doc(doc)
-	print(f'{PRINT_TITLE}>>>load_lepzig: Replacing gibberish in whole doc, 2nd time...')
+	print(f'Replacing gibberish in whole doc, 2nd time...')
 	doc = replace_gibberish_doc(doc)
-	print(f'{PRINT_TITLE}>>>load_lepzig: Replacing gibberish in whole doc, 3rd time...')
+	print(f'Replacing gibberish in whole doc, 3rd time...')
 	doc = replace_gibberish_doc(doc)
-	print(f'{PRINT_TITLE}>>>load_lepzig: Document length after gibberish replaced: {len(doc)} chars')
+	print(f'Document length after gibberish replaced: {len(doc)} chars')
 
 	# 文档层: 分行
-	print(f'{PRINT_TITLE}>>>load_lepzig: Splitting lines...')
+	print(f'Splitting lines...')
 	strlines = doc.split(sep='\n')
 	
 	# 文档层: 删除分行造成的最后一行空行
 	strlines = strlines[:-1]
-	print(f'{PRINT_TITLE}>>>load_lepzig: Total strlines {len(strlines)} lines')
+	print(f'Total strlines {len(strlines)} lines')
 
 	# 句子层: 去除行号
-	print(f'{PRINT_TITLE}>>>load_lepzig: Revmoing line numbers...')
+	print(f'Revmoing line numbers...')
 	strlines = [re.sub('^\d+\t','',line) for line in strlines]
 
 	# 句子层: 替换HTML字符实体
-	print(f'{PRINT_TITLE}>>>load_lepzig: Replacing html entities...')
+	print(f'Replacing html entities...')
 	strlines = replace_html_char_entity(strlines)
-	print(f'{PRINT_TITLE}>>>load_lepzig: Total lines after HTML replaced: {len(strlines)} lines')
+	print(f'Total lines after HTML replaced: {len(strlines)} lines')
 
 	# 句子层: 替换乱码
-	print(f'{PRINT_TITLE}>>>load_lepzig: Replacing gibberish after HTML replaced, 1st time...')
+	print(f'Replacing gibberish after HTML replaced, 1st time...')
 	strlines = replace_gibberish_strlines(strlines)
-	print(f'{PRINT_TITLE}>>>load_lepzig: Replacing gibberish after HTML replaced, 2nd time...')
+	print(f'Replacing gibberish after HTML replaced, 2nd time...')
 	strlines = replace_gibberish_strlines(strlines)
-	print(f'{PRINT_TITLE}>>>load_lepzig: Replacing gibberish after HTML replaced, 3rd time...')
+	print(f'Replacing gibberish after HTML replaced, 3rd time...')
 	strlines = replace_gibberish_strlines(strlines)
-	print(f'{PRINT_TITLE}>>>load_lepzig: Document length after gibberish replaced: {len(" ".join(strlines))} chars')
+	print(f'Document length after gibberish replaced: {len(" ".join(strlines))} chars')
 
 	# 句子层: 替换非ASCII标点符号
-	print(f'{PRINT_TITLE}>>>load_lepzig: replace_nonascii_punct...')
+	print(f'Replacing non-ascii punctuations...')
 	strlines = replace_nonascii_punct(strlines)
 
 	# 句子层: 查找拆分多合一行
-	# print(f'{PRINT_TITLE}>>>load_lepzig: Splitting duplex strlines...')
+	# print(f'Splitting duplex strlines...')
 	# strlines = split_duplex_lines(strlines)
-	# print(f'{PRINT_TITLE}>>>load_lepzig: Total strlines after splitting: {len(strlines)} ...')
+	# print(f'Total strlines after splitting: {len(strlines)} ...')
 	
 	# 句子层: 删除多余空格
-	print(f'{PRINT_TITLE}>>>load_lepzig: Removing extra spaces...')
+	print(f'Removing extra spaces...')
 	strlines = remove_extra_space(strlines)
 	
 	# 句子层: 删除空行
-	print(f'{PRINT_TITLE}>>>load_lepzig: Removing empty strlines...')
+	print(f'Removing empty strlines...')
 	strlines = remove_empty_strlines(strlines)
-	print(f'{PRINT_TITLE}>>>load_lepzig: Total Lines after Empty Lines Removed {len(strlines)}')
+	print(f'Total Lines after Empty Lines Removed {len(strlines)}')
 
 	# 句子层: 空格分词
 	tklines = [line.split() for line in strlines]
@@ -548,24 +548,24 @@ def stats(tklines):
 				num_nonvocal_token_cnt += 1
 			else:
 				abc_num_nonvocal_token_cnt += 1
-	print(f'Stats: Total Tokens: \t{token_cnt}')
-	stat_log.append(f'Stats: Total Tokens: \t{token_cnt}')
-	print(f'Stats: Total Illegal Tokens: \t{len(illegal_tokens)}')
-	stat_log.append(f'Stats: Total Illegal Tokens: \t{len(illegal_tokens)}')
-	print(f'Stats: Total Lines after Processing: \t{len(tklines)}')
-	stat_log.append(f'Stats: Total Lines after Processing: \t{len(tklines)}')
-	print(f'Stats: Abc Tokens: \t{abc_token_cnt}({100*abc_token_cnt/token_cnt:.3f}%)')
-	stat_log.append(f'Stats: Abc Tokens: \t{abc_token_cnt}({100*abc_token_cnt/token_cnt:.3f}%)')
-	print(f'Stats: Abc + Num Tokens: \t{abc_num_token_cnt}({100*abc_num_token_cnt/token_cnt:.3f}%)')
-	stat_log.append(f'Stats: Abc + Num Tokens: \t{abc_num_token_cnt}({100*abc_num_token_cnt/token_cnt:.3f}%)')
-	print(f'Stats: Abc + Sym Tokens: \t{abc_nonvocal_token_cnt}({100*abc_nonvocal_token_cnt/token_cnt:.3f}%)')
-	stat_log.append(f'Stats: Abc + Sym Tokens: \t{abc_nonvocal_token_cnt}({100*abc_nonvocal_token_cnt/token_cnt:.3f}%)')
-	print(f'Stats: Abc + Num + Sym Tokens: \t{abc_num_nonvocal_token_cnt}({100*abc_num_nonvocal_token_cnt/token_cnt:.3f}%)')
-	stat_log.append(f'Stats: Abc + Num + Sym Tokens: \t{abc_num_nonvocal_token_cnt}({100*abc_num_nonvocal_token_cnt/token_cnt:.3f}%)')
-	print(f'Stats: Num Tokens: \t{num_token_cnt}({100*num_token_cnt/token_cnt:.3f}%)')
-	stat_log.append(f'Stats: Num Tokens: \t{num_token_cnt}({100*num_token_cnt/token_cnt:.3f}%)')
-	print(f'Stats: Num + Sym Tokens: \t{num_nonvocal_token_cnt}({100*num_nonvocal_token_cnt/token_cnt:.3f}%)')
-	stat_log.append(f'Stats: Num + Sym Tokens: \t{num_nonvocal_token_cnt}({100*num_nonvocal_token_cnt/token_cnt:.3f}%)')
+	print(f'Total Tokens: \t{token_cnt}')
+	stat_log.append(f'Total Tokens: \t{token_cnt}')
+	print(f'Total Illegal Tokens: \t{len(illegal_tokens)}')
+	stat_log.append(f'Total Illegal Tokens: \t{len(illegal_tokens)}')
+	print(f'Total Lines after Processing: \t{len(tklines)}')
+	stat_log.append(f'Total Lines after Processing: \t{len(tklines)}')
+	print(f'Abc Tokens: \t{abc_token_cnt}({100*abc_token_cnt/token_cnt:.3f}%)')
+	stat_log.append(f'Abc Tokens: \t{abc_token_cnt}({100*abc_token_cnt/token_cnt:.3f}%)')
+	print(f'Abc + Num Tokens: \t{abc_num_token_cnt}({100*abc_num_token_cnt/token_cnt:.3f}%)')
+	stat_log.append(f'Abc + Num Tokens: \t{abc_num_token_cnt}({100*abc_num_token_cnt/token_cnt:.3f}%)')
+	print(f'Abc + Sym Tokens: \t{abc_nonvocal_token_cnt}({100*abc_nonvocal_token_cnt/token_cnt:.3f}%)')
+	stat_log.append(f'Abc + Sym Tokens: \t{abc_nonvocal_token_cnt}({100*abc_nonvocal_token_cnt/token_cnt:.3f}%)')
+	print(f'Abc + Num + Sym Tokens: \t{abc_num_nonvocal_token_cnt}({100*abc_num_nonvocal_token_cnt/token_cnt:.3f}%)')
+	stat_log.append(f'Abc + Num + Sym Tokens: \t{abc_num_nonvocal_token_cnt}({100*abc_num_nonvocal_token_cnt/token_cnt:.3f}%)')
+	print(f'Num Tokens: \t{num_token_cnt}({100*num_token_cnt/token_cnt:.3f}%)')
+	stat_log.append(f'Num Tokens: \t{num_token_cnt}({100*num_token_cnt/token_cnt:.3f}%)')
+	print(f'Num + Sym Tokens: \t{num_nonvocal_token_cnt}({100*num_nonvocal_token_cnt/token_cnt:.3f}%)')
+	stat_log.append(f'Num + Sym Tokens: \t{num_nonvocal_token_cnt}({100*num_nonvocal_token_cnt/token_cnt:.3f}%)')
 	return stat_log
 
 # 设计图见corprep_pipeline总体规划_20211024171633.drawio
@@ -573,21 +573,22 @@ def pipeline(filename,savepath):
 	filenamepobj = Path(filename)
 	savepathpobj = Path(savepath)
 	lepzig_sents_filename = filenamepobj.name
-	print(f'{PRINT_TITLE}: Processing file {filenamepobj.stem}')
-	print(f"====================PROCESS({LANG})====================")
+	print('\n')
+	print(f'Processing file {filenamepobj.stem}')
+	print(f"====================PRE-PROCESS({LANG})====================")
 	# 句子层
-	print(f'{PRINT_TITLE}: load_lepzig...')
+	print(f'Loading Leipzig corpora...')
 	proc_lines = load_lepzig(filename)
 	# token层
-	print(f'{PRINT_TITLE}: log_illegal_token...')
+	print(f'Logging illegal tokens...')
 	global illegal_tokens
 	illegal_tokens = log_illegal_token(proc_lines)
-	print(f'{PRINT_TITLE}: sanitize_token...')
+	print(f'Sanitizing tokens...')
 	proc_lines = sanitize_token(proc_lines)
-	print(f'{PRINT_TITLE}: lower_token...')
+	print(f'Lowering tokens...')
 	proc_lines = lower_token(proc_lines)
 	# 收尾层
-	print(f'{PRINT_TITLE}: remove_empty_tklines')
+	print(f'Removeing empty tokenized lines')
 	proc_lines = remove_empty_tklines(proc_lines)
 	print(f"====================SUMMARY({LANG})====================")
 	stat = stats(proc_lines)
@@ -595,13 +596,13 @@ def pipeline(filename,savepath):
 	try:
 		with open(f'{savepathpobj.joinpath(filenamepobj.stem)}.pkl',mode='wb') as save_pkl:
 			pickle.dump(proc_lines,save_pkl)
-			print(f'{PRINT_TITLE}: Result pickle saved at: {savepathpobj.joinpath(filenamepobj.stem)}.pkl')
+			print(f'Result pickle saved at: {savepathpobj.joinpath(filenamepobj.stem)}.pkl')
 	except:
 		print('Failed saving result pickle file.')
 	try:
 		with open(f'{savepathpobj.joinpath(filenamepobj.stem)}_except.txt',mode='w',encoding='utf-8') as save_except:
 			save_except.write(illegal_tokens)
-			print(f'{PRINT_TITLE}: Illegal tokens saved at: {savepathpobj.joinpath(filenamepobj.stem)}.txt')
+			print(f'Illegal tokens saved at: {savepathpobj.joinpath(filenamepobj.stem)}.txt')
 	except:
 		with open(f'{savepathpobj.joinpath(filenamepobj.stem)}_except.pkl',mode='wb') as save_except_fail_pkl:
 			pickle.dump(illegal_tokens,save_except_fail_pkl)
@@ -611,7 +612,7 @@ def pipeline(filename,savepath):
 			for i in stat:
 				save_stats.write(i)
 				save_stats.write('\n')
-			print(f'{PRINT_TITLE}: Statistics saved at: {savepathpobj.joinpath(filenamepobj.stem)}.txt')
+			print(f'Statistics saved at: {savepathpobj.joinpath(filenamepobj.stem)}.txt')
 	except:
 		print(f'Failed saving statistics.')
 	try:
@@ -619,7 +620,7 @@ def pipeline(filename,savepath):
 			for tkline in proc_lines:
 				save_pdoc.write(' '.join(tkline))
 				save_pdoc.write('\n')
-			print(f'{PRINT_TITLE}: Processed docs saved at: {savepathpobj.joinpath(filenamepobj.stem)}.txt')
+			print(f'Processed docs saved at: {savepathpobj.joinpath(filenamepobj.stem)}.txt')
 	except:
 
 		print(f'Failed saving processed docs.')
