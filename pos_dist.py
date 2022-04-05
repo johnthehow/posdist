@@ -8,7 +8,6 @@ import re
 import os
 import pickle
 import random
-import pandas
 import numpy
 import matplotlib.pyplot as plt
 from pathlib import Path
