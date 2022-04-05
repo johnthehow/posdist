@@ -35,6 +35,14 @@ Sample usage:
 
 `python corpus_prep.py english ~/source ~/output`
 
+Output:
+`<language>_news_<year>_1M-sentences.pkl`: pre-processed text (Python object serialization)
+`<language>_news_<year>_1M-sentences_except.txt`: a list of illegal tokens excluded from pre-processed text
+`<language>_news_<year>_1M-sentences_pdoc.txt`: pre-processed text
+`<language>_news_<year>_1M-sentences_stats.txt`: a summary of the pre-processed text
+
+
+
 ## Statistics and visualizations of linear-position-distribution
 
 ## Extracting attention weights for words in sentences
