@@ -1,5 +1,5 @@
 # Linear-position-distribution Analysis
-This repository contains code for 'Emergent linguistic regularities learned by neural network language models via linear position distribution'
+This repository contains code for 'Emergent linguistic regularities learned by neural network language models via linear position distribution'.
 It includes code for 功能1, 功能2(对应文中位置), ...
 
 ## Requirements
