@@ -37,18 +37,24 @@ Sample usage:
 
 For each plain-text corpus text, following output files are produced by this script:
 
-* `<language>_news_<year>_1M-sentences.pkl`: pre-processed text (Python object serialization)
+* `<language>_news_<year>_1M-sentences.pkl` pre-processed text (Python object serialization)
 
-* `<language>_news_<year>_1M-sentences_except.txt`: a list of illegal tokens excluded from pre-processed text
+* `<language>_news_<year>_1M-sentences_except.txt` a list of illegal tokens excluded from pre-processed text
 
-* `<language>_news_<year>_1M-sentences_pdoc.txt`: pre-processed text
+* `<language>_news_<year>_1M-sentences_pdoc.txt` pre-processed text
 
-* `<language>_news_<year>_1M-sentences_stats.txt`: a summary of the pre-processed text
+* `<language>_news_<year>_1M-sentences_stats.txt` a summary of the pre-processed text
 
 Only files named `<language>_news_<year>_1M-sentences.pkl` are used for further analysis.
 
 ## Statistics and visualizations of linear-position-distribution
-`pos_dist.py` computes the measure ![Mean D_{KL_{lengths}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Blengths%7D%7D), ![Mean D_{KL_{words}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Bwords%7D%7D), and ![Mean D_{KL_{years}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Byears%7D%7D) (see Table 2 of the paper).
+![Mean D_{KL_{lengths}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Blengths%7D%7D) is computed by `posdist_stat_lengths.py`
+usage:
+`~/posdist_stat_lengths <start-sentence-length> <end-sentence-length> <KDE-bandwidth> <corpus-dir> <word-list>`
+
+`pos_dist.py` produces the descriptive statistics and visualizations of the paper. 
+
+computes the measure , ![Mean D_{KL_{words}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Bwords%7D%7D), and ![Mean D_{KL_{years}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Byears%7D%7D) (see Table 2 of the paper).
 
 ## Extracting attention weights for words in sentences
 
