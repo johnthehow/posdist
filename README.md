@@ -61,7 +61,12 @@ Usage:
 `python posdist_stat_words.py  <start-sentence-length> <end-sentence-length> <KDE-bandwidth> <corpus-dir> <word-list>`
 
 
-computes the measure , , and ![Mean D_{KL_{years}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Byears%7D%7D) (see Table 2 of the paper).
+![Mean D_{KL_{years}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Byears%7D%7D) is computed by `posdist_stat_years.py`
+
+Usage:
+
+`python posdist_stat_years.py  <start-sentence-length> <end-sentence-length> <KDE-bandwidth> <corpus-dir> <word-list>`
+
 
 ## Extracting attention weights for words in sentences
 
