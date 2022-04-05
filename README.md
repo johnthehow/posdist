@@ -39,18 +39,13 @@ Sample usage:
 
 For each plain-text corpus text, following output files are produced by this script:
 
-```bash
-<language>_news_<year>_1M-sentences.pkl pre-processed text (Python object serialization)
+* `<language>_news_<year>_1M-sentences.pkl` pre-processed text (Python object serialization)
 
-<language>_news_<year>_1M-sentences_except.txt a list of illegal tokens excluded from pre-processed text
+* `<language>_news_<year>_1M-sentences_except.txt` a list of illegal tokens excluded from pre-processed text
 
-<language>_news_<year>_1M-sentences_pdoc.txt pre-processed text
+* `<language>_news_<year>_1M-sentences_pdoc.txt` pre-processed text
 
-<language>_news_<year>_1M-sentences_stats.txt a summary of the pre-processed text
-
-```
-
-
+* `<language>_news_<year>_1M-sentences_stats.txt` a summary of the pre-processed text
 
 Only files named `<language>_news_<year>_1M-sentences.pkl` are used for further analysis.
 
@@ -83,7 +78,13 @@ Usage:
 `posdist_viz_meaning.py` produces the figure exhibiting "pattern consistency for words of similar meanings" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 3. of the paper).
 
 ## Extracting attention weights for words in sentences
-Run `attn_rowpos.py` to get the attention weights and linear postions corresponding to words in sentences. For one word in a sentence, BERT generate 12×12 attention rows. This script put generated attention rows and position labs (as a combined NumPy array) in separated directories (named after layer and head number):
+Run `attn_rowpos.py` to get the attention weights and linear postions corresponding to words in sentences.
+
+Usage:
+
+`python attn_rowpos.py <sentence-length> <maximum-sentences-for-each-word> <corpus-path> <output-path> <words>`
+
+ For one word in a sentence, BERT generate 12×12 attention rows. This script put generated attention rows and position labs (as a combined NumPy array) in separated directories (named after layer and head number):
 
 ```bash
 ~/output/00_00/data/attnrowlabs_00_00.pkl
@@ -91,10 +92,14 @@ Run `attn_rowpos.py` to get the attention weights and linear postions correspond
 ...
 ~/output/12_12/data/attnrowlabs_12_12.pkl
 ```
-
+## Probing linear-position-distribution from BERT
+`pos_probe.py` depdends on the result of `attn_rowpos.py`, the outputs of the latter script serve as the input dataset to the former.
 
 Usage:
 
-`python attn_rowpos.py <sentence-length> <maximum-sentences-for-each-word> <corpus-path> <output-path> <words>`
+`python pos_probe.py <train/test-split> <batch-size> <epochs> <learning-rate> <dataset-path>` 
+
+
+
 
 
