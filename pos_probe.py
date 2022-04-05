@@ -187,18 +187,5 @@ if __name__ == '__main__':
 	for layer in range(1,13):
 		for head in range(1,13):
 			train_onehead_probe(dataset_path,layer,head,split,batch,batch,200,epochs,learn_rate)
-	accuracies = []
-	for layer in range(1,13):
-		for head in range(1,13):
-			for fname in os.listdir(dataset_path.joinpath(f'{lay:02d}_{head:02d}').joinpath('res')):
-				if fname.find('pkl') != -1:
-					print(fname[22:30])
-					accuracies.append(f'{layer:02d}\t{head:02d}\t{fname[22:30]}')
-	with open(dataset_path, mode='w+', encoding='utf-8') as txt:
-		txt.write('layer\thead\tacc')
-		txt.write('\n')
-		for line in accuracies:
-			txt.write(line)
-			txt.write('\n')
 	print(f'Train records and trained models saved at {dataset_path}')
 	print('Done!')
