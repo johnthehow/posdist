@@ -154,7 +154,7 @@ def train_onehead_probe(dataset_path,layer,head,split_ratio,train_batch_size,tes
 	with open(dataset_path.joinpath(f'baseline_{baseline}'),mode='w+') as f:
 		pass
 	# 保存该attention head的精度
-	with open(dataset_path.joinpath(accuracies.txt),mode='a+',encoding='utf-8') as f:
+	with open(dataset_path.joinpath('accuracies.txt'),mode='a+',encoding='utf-8') as f:
 		f.write('layer\thead\tacc\n')
 		f.write(f'{layer}\t{head}\t{test_res[acc]:>0.8f}\n')
 
