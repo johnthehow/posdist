@@ -18,9 +18,10 @@ Extracting attention weights for words in sentences:
 
 
 ## Pre-processing Leipzig news corpora
-We provide a script `corpus_prep.py` for Pre-processing Leipzig news corpora. Leipzig used in the paper can be downloaded from <https://wortschatz.uni-leipzig.de/en/download/>. 
+We provide a script `corpus_prep.py` for pre-processing Leipzig news corpora. Leipzig used in the paper can be downloaded from <https://wortschatz.uni-leipzig.de/en/download/>. Some neccessay steps are required before runing the pre-processing script: 1. Extract plain-text corpora (`<language>_news_<year>_1M-sentences.txt`) from compressed archives (\*.tar.gz). 2. Put extracted text files under same directory for further reference. To get a corpus covering all years of collection, simply concatenate all extracted texts.
 
 Corpus pre-preprocessing is run with:
+
 `python corpus_prep.py <language> <path-to-your-data> <output-path>`
 
 ## Statistics and visualizations of linear-position-distribution
