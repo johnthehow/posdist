@@ -16,7 +16,7 @@ if __name__ == '__main__':
 			baseline = float(fname[10:])
 
 	layer_means = []
-	fig = plt.figure(figsize = (8,8),dpi=300)
+	fig = plt.figure(figsize = (8,6),dpi=300)
 	axe = fig.subplots()
 	for i in range(1,13):
 		axe.scatter(acc[acc.layer==i].layer,acc[acc.layer==i].acc,s=12)
