@@ -1,12 +1,14 @@
 import os
 import sys
 import torch
+import warnings
 from transformers import BertModel
 from transformers import BertTokenizer
 from transformers import logging
 from pathlib import Path
 import pickle
 
+warnings.filterwarnings("ignore")
 logging.set_verbosity_error()
 
 bert_model = BertModel.from_pretrained('bert-base-uncased')
@@ -290,6 +292,7 @@ if __name__ == '__main__':
 	corpus_path = Path(sys.argv[3])
 	save_path = Path(sys.argv[4])
 	wordlist = sys.argv[5].split()
+	print('Loading corpus...')
 	with open(corpus_path, mode='rb') as pkl:
 		corpus = pickle.load(pkl)
 	res = get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path)
