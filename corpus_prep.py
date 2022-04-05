@@ -630,8 +630,6 @@ if __name__ == "__main__":
 	language = sys.argv[1]
 	source_path = Path(sys.argv[2])
 	output_path = Path(sys.argv[3])
-	for txt in os.listdir(source_path):
-		pipeline(f'{source_path.joinpath(txt)}',output_path)
 
 
 
@@ -794,3 +792,6 @@ if __name__ == "__main__":
 		LEGAL_CHAR = LEGAL_ABC + LEGAL_PUNCT + LEGAL_DIGIT
 	else:
 		print('unsupported language')
+
+	for txt in os.listdir(source_path):
+		pipeline(f'{source_path.joinpath(txt)}',output_path)
