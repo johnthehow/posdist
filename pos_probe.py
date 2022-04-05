@@ -156,7 +156,7 @@ def train_onehead_probe(dataset_path,layer,head,split_ratio,train_batch_size,tes
 	# 保存该attention head的精度
 	with open(dataset_path.joinpath(accuracies.txt),mode='a+',encoding='utf-8') as f:
 		f.write('layer\thead\tacc\n')
-		f.write(f'{layer}\t{head}\t{test_res[acc]>0.8f}\n')
+		f.write(f'{layer}\t{head}\t{test_res[acc]:>0.8f}\n')
 
 
 	# 保存已训练模型路径
