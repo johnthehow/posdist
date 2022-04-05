@@ -229,7 +229,6 @@ def get_word_attn_rowlabs(word,sent_len,corpus,sent_max):
 		word_pos.append(word_row_num)
 		for layer in range(12):
 			for head in range(12):
-				print(f'Extracting attention rows of layer-{layer:02d} head-{head:02d}...')
 				attn_trimmed = attn_matrix_trim_scale(sent_attn_144[layer][head])
 				attn_dense = attn_matrix_denser(idmap_dict,attn_trimmed)
 				attn_row = attn_dense[word_row_num].detach()
