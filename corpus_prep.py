@@ -631,7 +631,13 @@ if __name__ == "__main__":
 	source_path = Path(sys.argv[2])
 	output_path = Path(sys.argv[3])
 	for archive in os.listdir(source_path):
-		print(archive)
+		print(f'decompressing {archive} ...')
+		zip_archive = tarfile.open(source_path,joinpath(archive))
+		for txt_archive in zip_archive.getnames():
+			if txt_archive.find('sentences') != -1:
+				txt_sentences = txt_archive
+				zip_archive.extract(txt_sentences,output_path)
+
 
 	if language == 'english':
 		BASIC_LATIN_LOWER = 'abcdefghijklmnopqrstuvwxyz'
