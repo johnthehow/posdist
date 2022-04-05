@@ -190,7 +190,7 @@ if __name__ == '__main__':
 				if fname.find('pkl') != -1:
 					print(fname[22:30])
 					accuracies.append(f'{layer:02d}\t{head:02d}\t{fname[22:30]}')
-	with open(dataset_path, mode='w+' encoding='utf-8') as txt:
+	with open(dataset_path, mode='w+', encoding='utf-8') as txt:
 		txt.write('layer\thead\tacc')
 		txt.write('\n')
 		for line in accuracies:
