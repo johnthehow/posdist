@@ -391,7 +391,7 @@ def lower_token(tklines):
 # 包含总体规划中的 文档层 和 句子层
 def load_leipzig(filename):
 	# 文件层: 打开文件
-	print(f'Reading leipzig sentences...')
+	print(f'Reading Leipzig sentences...')
 	with open(filename,mode='r',encoding='utf-8') as lpzfile:
 		doc = lpzfile.read()
 	print(f'Document length: {len(doc)} chars')
