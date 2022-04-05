@@ -154,22 +154,26 @@ def train_onehead_probe(dataset_path,layer,head,split_ratio,train_batch_size,tes
 
 	# 收尾
 	train_rec_file.close()
+	print(f'Train records and trained models saved at {dataset_path}')
 	print('Done!')
 
 	return
 
 # IDEL运行版代码
-dataset_path = Path(input('Heads directory: '))
-layer = input('Layer: ')
-head = input('Head: ')
-epochs = int(input('Epochs: '))
+# dataset_path = Path(input('Heads directory: '))
+# layer = input('Layer: ')
+# head = input('Head: ')
+# epochs = int(input('Epochs: '))
 
-# # Shell运行版代码
-# dataset_path = sys.argv[1]
-# layer = sys.argv[2]
-# head = sys.argv[3]
-# epochs = int(sys.argv[4])
+
 
 
 # 执行函数(一次性训练一个单词的所有head)
-train_onehead_probe(dataset_path,layer,head,0.3,32,32,200,epochs,1e-3)
+
+
+if __name__ == '__main__':
+	layer = int(sys.argv[1])
+	head = int(sys.argv[2])
+	epochs = int(sys.argv[3])
+	dataset_path = Path(sys.argv[4])
+	train_onehead_probe(dataset_path,layer,head,0.3,32,32,200,epochs,1e-3)
