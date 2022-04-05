@@ -48,7 +48,7 @@ For each plain-text corpus text, following output files are produced by this scr
 Only files named `<language>_news_<year>_1M-sentences.pkl` are used for further analysis.
 
 ## Statistics and visualizations of linear-position-distribution
-`pos_dist.py` computes the measure mean ![D_{KL_{lengths}}](https://latex.codecogs.com/svg.image?D_%7BKL_%7Blengths%7D%7D)
+`pos_dist.py` computes the measure mean ![Mean D_{KL_{lengths}}](https://latex.codecogs.com/svg.image?Mean%20D_%7BKL_%7Blengths%7D%7D)
 
 ## Extracting attention weights for words in sentences
 
