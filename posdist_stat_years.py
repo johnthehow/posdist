@@ -26,6 +26,7 @@ def 周边服务函数():
 # 函数功能: 载入语料库
 def corpus_loader(pkl_path):
 	'''载入PKL格式的清理过的tokenized_lines形式的语料库'''
+	print('Loading corpus...')
 	with open(pkl_path, mode='rb') as corpus_file:
 		corpus_pkl = pickle.load(corpus_file)
 	return corpus_pkl
@@ -34,6 +35,7 @@ def corpus_loader(pkl_path):
 # 依赖函数: 2022012025946
 # 参数解释: corpus_path是一年pkl的文件路径, 函数会自动根据yearlist替换年份
 def corpora_loader(yearlist,corpus_path):
+	print('Loading corpora...')
 	corpus_years = []
 	for year in yearlist:
 		new_corpus_path = re.sub('\d{4}',str(year),corpus_path)
