@@ -177,6 +177,6 @@ if __name__ == '__main__':
 	epochs = int(sys.argv[3])
 	learn_rate = float(sys.argv[4])
 	dataset_path = Path(sys.argv[5])
-	for lay in range(1,13):
-		for hd in range(1)
-	train_onehead_probe(dataset_path,layer,head,split,batch,batch,200,epochs,learn_rate)
+	for layer in range(1,13):
+		for head in range(1,13):
+			train_onehead_probe(dataset_path,layer,head,split,batch,batch,200,epochs,learn_rate)
