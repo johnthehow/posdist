@@ -35,7 +35,7 @@ Sample usage:
 
 `python corpus_prep.py english ~/source ~/output`
 
-Output:
+For each plain-text corpus text, following output files are produced by this script:
 
 `<language>_news_<year>_1M-sentences.pkl`: pre-processed text (Python object serialization)
 
