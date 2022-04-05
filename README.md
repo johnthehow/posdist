@@ -1,5 +1,5 @@
 # Linear-position-distribution Analysis
-This repository contains code for 论文题目
+This repository contains code for 'Emergent linguistic regularities learned by neural network language models via linear position distribution'
 It includes code for 功能1, 功能2(对应文中位置), ...
 
 ## Requirements
@@ -17,10 +17,10 @@ Extracting attention weights for words in sentences:
 
 
 
-## Pre-processing Leipzig news corpora:
+## Pre-processing Leipzig news corpora
 We provide a script for
 
-## Statistics and visualizations of Linear-position-distribution
+## Statistics and visualizations of linear-position-distribution
 
-## Extracting attention weights for words in sentences:
+## Extracting attention weights for words in sentences
 
