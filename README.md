@@ -37,13 +37,13 @@ Sample usage:
 
 For each plain-text corpus text, following output files are produced by this script:
 
-* `~/output/<language>_news_<year>_1M-sentences.pkl`: pre-processed text (Python object serialization)
+* `<language>_news_<year>_1M-sentences.pkl`: pre-processed text (Python object serialization)
 
-* `~/output/<language>_news_<year>_1M-sentences_except.txt`: a list of illegal tokens excluded from pre-processed text
+* `<language>_news_<year>_1M-sentences_except.txt`: a list of illegal tokens excluded from pre-processed text
 
-* `~/output/<language>_news_<year>_1M-sentences_pdoc.txt`: pre-processed text
+* `<language>_news_<year>_1M-sentences_pdoc.txt`: pre-processed text
 
-* `/output/<language>_news_<year>_1M-sentences_stats.txt`: a summary of the pre-processed text
+* `<language>_news_<year>_1M-sentences_stats.txt`: a summary of the pre-processed text
 
 Only files named `<language>_news_<year>_1M-sentences.pkl` are used for further analysis.
 
