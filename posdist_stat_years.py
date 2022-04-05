@@ -278,11 +278,11 @@ def diff_vwords_vlens_vyears(wordlist,start_len,end_len,corpora,bandwidth):
 	return kldmeans_avg,kldstds_avg
 
 if __name__ == '__main__':
-	start_len = int(sys.argv[0])
-	end_len = int(sys.argv[1])
-	bandwidth = float(sys.argv[2])
-	corpora_dir = Path(sys.argv[3])
-	wordlist = sys.argv[4].split()
+	start_len = int(sys.argv[1])
+	end_len = int(sys.argv[2])
+	bandwidth = float(sys.argv[3])
+	corpora_dir = Path(sys.argv[4])
+	wordlist = sys.argv[5].split()
 	yearlist = set()
 	for fname in os.listdir(corpora_dir):
 		if fname.find('pkl') != -1:
