@@ -103,6 +103,8 @@ Sample usage:
 
 `python pos_probe.py 0.3 32 200 1e-3 ~/output/`
 
+Run `pos_probe_viz.py` to get a visualized overview of the test-set accuracy of all 12×12 trained probes (as Fig. 4. of the paper).
+
 
 
 
