@@ -1,3 +1,4 @@
+# coding=utf8
 # 程序思路见corprep总体规划_20211024171633.drawio
 # 附件: 欧洲语言特殊字母表_20211022170741.zip
 import re
@@ -626,9 +627,9 @@ def pipeline(filename,savepath):
 	return proc_lines
 
 if __name__ == "__main__":
-	language = sys.argv[0]
-	source_path = Path(sys.argv[1])
-	output_path = Path(sys.argv[2])
+	language = sys.argv[1]
+	source_path = Path(sys.argv[2])
+	output_path = Path(sys.argv[3])
 	for archive in os.listdir(source_path):
 		print(archive)
 
