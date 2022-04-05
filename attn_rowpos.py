@@ -289,5 +289,7 @@ if __name__ == '__main__':
 	sent_max = int(sys.argv[2])
 	corpus_path = Path(sys.argv[3])
 	save_path = Path(sys.argv[4])
-	word_list = sys.argv[5].split()
+	wordlist = sys.argv[5].split()
+	with open(corpus_path, mode='rb') as pkl:
+		corpus = pickle.load(pkl)
 	res = get_words_attn_rowlabs(wordlist,sent_len,corpus,sent_max,save_path)
