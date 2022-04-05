@@ -791,7 +791,7 @@ if __name__ == "__main__":
 		LEGAL_PUNCT = string.punctuation + '°' + '$£€¥₹'
 		LEGAL_CHAR = LEGAL_ABC + LEGAL_PUNCT + LEGAL_DIGIT
 	else:
-		print('unsupported language')
+		raise ValueError('unsupported language')
 
 	for txt in os.listdir(source_path):
 		pipeline(f'{source_path.joinpath(txt)}',output_path)
