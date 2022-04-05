@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
 	layer_means = []
 	for i in range(1,13):
-		plt.scatter(acc[acc.lay==i].lay,acc[acc.lay==i].acc,s=12)
+		plt.scatter(acc[acc.layer==i].layer,acc[acc.layer==i].acc,s=12)
 		layer_means.append(acc[acc.lay==i].mean().acc)
 	plt.plot(range(1,13),layer_means,marker='^',label='layer mean accuracy')
 	plt.plot([1,12],[baseline,baseline],color='k',ls='--',linewidth=1)
