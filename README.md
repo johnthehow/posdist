@@ -3,7 +3,7 @@ This repository contains code for 'Emergent linguistic regularities learned by n
 It includes code for pre-processing Leipzig news corpora, quantitative and visualized analysis along with probing classifiers for linear-position-distributions.
 
 ## Requirements
-All scirpts in this repo require Python 3.6+
+All scirpts in this repo require Python 3.6+ to run properly.
 
 For pre-processing Leipzig news corpora:
 * [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
