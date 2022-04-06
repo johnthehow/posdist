@@ -112,6 +112,9 @@ Output:
 
 Run `pos_probe_viz.py` to get a visualized overview of the test-set accuracy of all 12×12 trained probes (as Fig. 4. of the paper).
 
+Usage:
+
+`python pos_probe_viz.py <output-directory-of-attn_rowpos.py>`
 
 
 
