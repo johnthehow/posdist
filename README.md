@@ -1,6 +1,6 @@
 # Linear-position-distribution Analysis
 This repository contains code for 'Emergent linguistic regularities learned by neural network language models via linear position distribution'.
-It includes code for 功能1, 功能2(对应文中位置), ...
+It includes code for pre-processing Leipzig news corpora, quantitative and visualized analysis along with probing classifiers for linear-position-distributions.
 
 ## Requirements
 All scirpts in this repo require Python 3.6+
