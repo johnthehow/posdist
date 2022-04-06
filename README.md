@@ -1,5 +1,5 @@
 # Linear-position-distribution Analysis
-This repository contains code to reproduce the results in the paper 'Emergent linguistic regularities learned by neural network language models via linear position distribution'.
+This repository contains code to reproduce the results in paper *Emergent linguistic regularities learned by neural network language models via linear position distribution*.
 It includes code for pre-processing Leipzig news corpora, quantitative and visualized analysis along with probing classifiers for linear-position-distributions.
 
 ## Requirements
