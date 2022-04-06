@@ -84,7 +84,7 @@ Usage:
 
 `python attn_rowpos.py <sentence-length> <maximum-sentences-for-each-word> <corpus-path> <output-path> <words>`
 
- For one word in a sentence, BERT generate 12×12 attention rows. This script put generated attention rows and position labs (as a combined NumPy array) in separated directories (named after layer and head number):
+ For one word in a sentence, we extract 12×12 attention rows from BERT (corresponding to 12×12 attention heads). This script put generated attention rows and position labs (as a combined NumPy array) in separated directories (named after layer and head number):
 
 ```bash
 ~/output/00_00/data/attnrowlabs_00_00.pkl
@@ -102,6 +102,13 @@ Usage:
 Sample usage:
 
 `python pos_probe.py 0.3 32 200 1e-3 ~/output/`
+
+Output:
+```bash
+~/output/res/train_rec_<layer>_<head>_<datetime>.txt # a record of the training process
+~/output/res/trained_mod_<layer>_<head>_acc_<accuracy>_<datetime>.pkl # a trained probe
+
+```
 
 Run `pos_probe_viz.py` to get a visualized overview of the test-set accuracy of all 12×12 trained probes (as Fig. 4. of the paper).
 
