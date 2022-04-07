@@ -27,7 +27,7 @@ if __name__ == '__main__':
 	axe.set_ylabel('accuracy')
 	axe.set_ylim(0,1.05)
 	axe.plot([1,12],[baseline,baseline],color='k',ls='--',linewidth=1)
-	axe.text(3.5,baseline-0.034,f'local majority baseline: {baseline}')
+	axe.text(3.5,baseline-0.054,f'local majority baseline: {baseline}')
 	plt.legend()
 	now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 	plt.savefig(acc_path.joinpath(f'probe_acc_{now}.png'),format='png')
