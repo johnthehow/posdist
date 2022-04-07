@@ -89,8 +89,8 @@ Usage:
 Sample output:
 
 ```
-~/output/00_00/data/attnrowlabs_00_00.pkl
-~/output/00_01/data/attnrowlabs_00_01.pkl
+~/output/01_01/data/attnrowlabs_01_01.pkl
+~/output/01_02/data/attnrowlabs_01_02.pkl
 ...
 ~/output/12_12/data/attnrowlabs_12_12.pkl
 ```
