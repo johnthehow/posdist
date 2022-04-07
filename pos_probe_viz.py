@@ -5,8 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
 
-
-
 if __name__ == '__main__':
 	acc_path = Path(sys.argv[1])
 	acc = pd.read_csv(acc_path.joinpath('accuracies.txt'),sep='\t')
