@@ -86,7 +86,7 @@ Usage:
 
  For one word in a sentence, we extract 12×12 attention rows from BERT (corresponding to 12×12 attention heads). This script put generated attention rows and position labs (as a combined NumPy array) in separated directories (named after layer and head number):
 
-```bash
+```
 ~/output/00_00/data/attnrowlabs_00_00.pkl
 ~/output/00_01/data/attnrowlabs_00_01.pkl
 ...
