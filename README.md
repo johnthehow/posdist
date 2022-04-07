@@ -104,7 +104,7 @@ Sample usage:
 `python pos_probe.py 0.3 32 200 1e-3 ~/output/`
 
 Output:
-```bash
+```
 ~/output/res/train_rec_<layer>_<head>_<datetime>.txt # a record of the training process
 ~/output/res/trained_mod_<layer>_<head>_acc_<accuracy>_<datetime>.pkl # a trained probe
 
