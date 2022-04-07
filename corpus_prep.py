@@ -1,6 +1,4 @@
 # coding=utf8
-# 程序思路见corprep总体规划_20211024171633.drawio
-# 附件: 欧洲语言特殊字母表_20211022170741.zip
 import re
 import os
 import sys
@@ -13,7 +11,6 @@ warnings.filterwarnings("ignore")
 
 
 
-# 在整个文本中替换乱码
 def replace_gibberish_doc(doc):
 	hex_map = GIBBERISH_TABLE
 	hex_map_keys = list(hex_map.keys()) 
@@ -21,7 +18,6 @@ def replace_gibberish_doc(doc):
 		doc = doc.replace(key,hex_map[key])
 	return doc
 
-# 在每句话中替换乱码
 def replace_gibberish_strlines(strlines):
 	proc_lines = []
 	hex_map = GIBBERISH_TABLE
@@ -33,7 +29,6 @@ def replace_gibberish_strlines(strlines):
 	return proc_lines
 
 
-# 删除多余空格和非空格间隔符为空格, 必须在分行前使用
 def remove_extra_space(strlines):
 	proc_lines = []
 	for line in strlines:
@@ -42,7 +37,6 @@ def remove_extra_space(strlines):
 	return proc_lines
 
 
-# 记录不合法的token: 即含有未定义在合法字符中的字符的token
 def log_illegal_token(tklines):
 	rec = []
 	for line in tklines:
@@ -57,7 +51,6 @@ def log_illegal_token(tklines):
 	return res
 
 
-# 替换html字符实体, 必须在分行后使用, 分行前使用会丢失部分换行符
 def replace_html_char_entity(strlines):
 	proc_lines = []
 	for line in strlines:
@@ -65,7 +58,6 @@ def replace_html_char_entity(strlines):
 	return proc_lines
 
 
-# 分行后使用, 删除空行
 def remove_empty_strlines(strlines):
 	res = []
 	empty_line_cnt = 0
@@ -77,7 +69,6 @@ def remove_empty_strlines(strlines):
 	return res
 
 
-# 所有清理完成后, 删除空行
 def remove_empty_tklines(tklines):
 	res = []
 	empty_line_cnt = 0
@@ -89,7 +80,6 @@ def remove_empty_tklines(tklines):
 	print(f'{empty_line_cnt} Empty Lines Removed')
 	return res
 
-# 判断一个token是否含有非法字符
 def is_contain_illegal_char(token):
 	res = False
 	for char in token:
@@ -97,7 +87,6 @@ def is_contain_illegal_char(token):
 			res = True
 	return res
 
-# 判断一个token是否含有且只含有字母
 def is_only_legalabc(token):
 	match_cnt = 0
 	for char in token:
@@ -122,7 +111,6 @@ def is_only_numeric(token):
 	return res
 
 
-# 判断一个token是否 含有且只含有非发声字符
 def is_only_nonvocal(token):
 	match_cnt = 0
 	for char in token:
@@ -135,12 +123,10 @@ def is_only_nonvocal(token):
 	return res
 
 
-# 判断token是否为单质字符串, 依赖函数is_only_en_abc(), is_only_nonvocal()
 def is_homo(token):
 	return is_only_legalabc(token) or is_only_numeric(token) or is_only_nonvocal(token)  and len(token) != 0
 
 
-# 判断token是否 是且仅是 字母+符号 的混合
 def is_mix_legalabc_nonvocal(token):
 	abc_cnt = 0
 	nonvocal_cnt = 0
@@ -156,7 +142,6 @@ def is_mix_legalabc_nonvocal(token):
 	return res
 
 
-# 判断一个token是否是 字母和数字的混合
 def is_mix_legalabc_num(token):
 	abc_cnt = 0
 	num_cnt = 0
@@ -171,7 +156,6 @@ def is_mix_legalabc_num(token):
 		res = False
 	return res
 
-# 判断一个token是否是且仅是数字和符号的混合
 def is_mix_num_nonvocal(token):
 	num_cnt = 0
 	nonvocal_cnt = 0
@@ -187,7 +171,6 @@ def is_mix_num_nonvocal(token):
 	return res
 
 
-# 判断一个token是否是且仅是 数字-符号-字母 的混合
 def is_mix_legalabc_num_nonvocal(token):
 	res = False
 	if is_homo(token) == False:
@@ -199,7 +182,6 @@ def is_mix_legalabc_num_nonvocal(token):
 	return res
 
 
-# 判断一个token是否含有且仅含有一段连续的字母串
 def is_contain_onlyone_legalabc_seq(token):
 	char_cnt = 0
 	abc_cnt = 0
@@ -212,8 +194,6 @@ def is_contain_onlyone_legalabc_seq(token):
 	res = all(a+1==b for a, b in zip(abc_idxs, abc_idxs[1:])) and abc_cnt !=0
 	return res
 
-# 含有且仅含有一段连续的字母串的token中所有的字母并粘合为一个token
-# 依赖 is_contain_onlyone_legalabc_seq
 def keep_only_legalabc_seq(token):
 	if is_contain_onlyone_legalabc_seq(token):
 		proc_token = ''
@@ -225,7 +205,6 @@ def keep_only_legalabc_seq(token):
 	return proc_token
 
 
-# 判断是否有形如state-of-the-art, vis-a-vis形式的单词
 def is_contain_sota(token):
 	regex = re.compile(f'[{LEGAL_ABC}]+(-[{LEGAL_ABC}]+)+')
 	if re.search(regex,token) != None:
@@ -243,7 +222,6 @@ def keep_only_sota(token):
 		print('keep_only_sota: trying to extract sota while don\'t have one')
 	return res
 
-# 判断是否是 u.s.a. 或 u.s.a 或 a.m. 或 p.m形式
 def is_usa(token):
 	regex = re.compile(f'^[{LEGAL_ABC}](\.[{LEGAL_ABC}])+\.?$')
 	if re.search(regex,token) != None:
@@ -252,7 +230,6 @@ def is_usa(token):
 		res = False
 	return res
 
-# 判断是否是 ^单词,单词$ 形式的token
 def is_abc_comma_abc(token):
 	regex = re.compile(f'^([{LEGAL_ABC}]{{2,}})(,)([{LEGAL_ABC}]{{2,}})$')
 	if re.search(regex,token) != None:
@@ -262,7 +239,6 @@ def is_abc_comma_abc(token):
 	return res
 
 
-# 拆分逗号分隔的单词
 def split_abc_comma_abc(token):
 	if is_abc_comma_abc(token):
 		res = []
@@ -274,7 +250,6 @@ def split_abc_comma_abc(token):
 		print('split_abc_comma_abc: trying to split abc,abc while is not one')
 	return res
 
-# 判断是否是.!?分隔的单词
 def is_abc_endpunct_abc(token):
 	regex = re.compile(f'^([{LEGAL_ABC}]{{2,}})({END_PUNCT})([{LEGAL_ABC}]{{2,}})$')
 	if re.search(regex,token) != None:
@@ -283,7 +258,6 @@ def is_abc_endpunct_abc(token):
 		res = False
 	return res
 
-# 拆分.!?分隔的单词
 def split_abc_endpunct_abc(token):
 	if is_abc_endpunct_abc(token):
 		res = []
@@ -303,14 +277,12 @@ def is_contain_contract(token):
 			res = True
 	return res
 
-# 依赖 is_contain_contract
 def keep_only_contract(token):
 	regex = re.compile(f'[{LEGAL_ABC}]+\'[{LEGAL_ABC}]+')
 	if is_contain_contract(token) == True:
 		match = re.search(regex,token).group()
 	return match
 
-# 清除token两端的非发声符号
 def strip_nonvocal_mix_nonvocal(token):
 	origin = token
 	if token[0] not in VOCAL_CHAR:
@@ -327,10 +299,7 @@ def strip_nonvocal_mix_nonvocal(token):
 		token = strip_nonvocal_mix_nonvocal(token)
 	return token
 
-# 依赖: 无依赖函数
-# 各种引号大全见https://unicode-table.com/en/sets/quotation-marks/
 def replace_nonascii_punct(strlines):
-	#前边: 错误的符号 后边: 正确的符号
 	nonvocal_conv_table = [('“”„‟⹂❞❝〞〝〟«»❠🙷🙶🙸＂「」⸗	','"'),('‹›’‘‛❛❜❟′ʻʾ´`ʼʿ̕ʽ՝̒̔︐´＇᠈̒','\''),('‒—–―‑‐ー−─¬―—–‐－‑-﹣⁃᠆‧⹀⸚゠֊͜','-'),('…⋯᠁','...'),('⸴̦،🄊⹁⍪⹌⸲‚꛵𖺗𝪇🄁',','),('⁄∕̷⼃','/')]
 	proc_lines = []
 	for line in strlines:
@@ -346,7 +315,6 @@ def replace_nonascii_punct(strlines):
 		proc_lines.append(proc_line)
 	return proc_lines
 
-# 判断是否含有URL
 def is_contain_url(token):
 	url = '\.com|\.net|\.org|\.edu|\.gov|\.mil|\.aero|\.asia|\.biz|\.cat|\.coop|\.info|\.int|\.jobs|\.mobi|\.museum|\.name|\.post|\.pro|\.tel|\.travel|\.xxx|\.ac|\.ad|\.ae|\.af|\.ag|\.ai|\.al|\.am|\.an|\.ao|\.aq|\.ar|\.as|\.at|\.au|\.aw|\.ax|\.az|\.ba|\.bb|\.bd|\.be|\.bf|\.bg|\.bh|\.bi|\.bj|\.bm|\.bn|\.bo|\.br|\.bs|\.bt|\.bv|\.bw|\.by|\.bz|\.ca|\.cc|\.cd|\.cf|\.cg|\.ch|\.ci|\.ck|\.cl|\.cm|\.cn|\.co|\.cr|\.cs|\.cu|\.cv|\.cx|\.cy|\.cz|\.dd|\.de|\.dj|\.dk|\.dm|\.do|\.dz|\.ec|\.ee|\.eg|\.eh|\.er|\.es|\.et|\.eu|\.fi|\.fj|\.fk|\.fm|\.fo|\.fr|\.ga|\.gb|\.gd|\.ge|\.gf|\.gg|\.gh|\.gi|\.gl|\.gm|\.gn|\.gp|\.gq|\.gr|\.gs|\.gt|\.gu|\.gw|\.gy|\.hk|\.hm|\.hn|\.hr|\.ht|\.hu|\.id|\.ie|\.il|\.im|\.in|\.io|\.iq|\.ir|\.is|\.it|\.je|\.jm|\.jo|\.jp|\.ke|\.kg|\.kh|\.ki|\.km|\.kn|\.kp|\.kr|\.kw|\.ky|\.kz|\.la|\.lb|\.lc|\.li|\.lk|\.lr|\.ls|\.lt|\.lu|\.lv|\.ly|\.ma|\.mc|\.md|\.me|\.mg|\.mh|\.mk|\.ml|\.mm|\.mn|\.mo|\.mp|\.mq|\.mr|\.ms|\.mt|\.mu|\.mv|\.mw|\.mx|\.my|\.mz|\.na|\.nc|\.ne|\.nf|\.ng|\.ni|\.nl|\.no|\.np|\.nr|\.nu|\.nz|\.om|\.pa|\.pe|\.pf|\.pg|\.ph|\.pk|\.pl|\.pm|\.pn|\.pr|\.ps|\.pt|\.pw|\.py|\.qa|\.re|\.ro|\.rs|\.ru|\.rw|\.sa|\.sb|\.sc|\.sd|\.se|\.sg|\.sh|\.si|\.sj|\. Ja|\.sk|\.sl|\.sm|\.sn|\.so|\.sr|\.ss|\.st|\.su|\.sv|\.sx|\.sy|\.sz|\.tc|\.td|\.tf|\.tg|\.th|\.tj|\.tk|\.tl|\.tm|\.tn|\.to|\.tp|\.tr|\.tt|\.tv|\.tw|\.tz|\.ua|\.ug|\.uk|\.us|\.uy|\.uz|\.va|\.vc|\.ve|\.vg|\.vi|\.vn|\.vu|\.wf|\.ws|\.ye|\.yt|\.yu|\.za|\.zm|\.zw|\.php|\.html|\.htm|\.asp|http|https|ftp|www|://'
 	if re.search(url,token) != None:
@@ -369,7 +337,6 @@ def keep_only_currency(token):
 	res = match.group()
 	return res
 
-# 替换URL为[URL]
 def replace_url(token):
 	if is_contain_url(token):
 		res = '[URL]'
@@ -386,88 +353,62 @@ def lower_token(tklines):
 		proc_lines.append(proc_line)
 	return proc_lines
 
-# 载入leipzig语料库(sentences), 处理成初步的tokenized_lines
-# 设计流程图见 corprep_pipeline总体规划_20211024171633.drawio
-# 包含总体规划中的 文档层 和 句子层
 def load_leipzig(filename):
-	# 文件层: 打开文件
 	print(f'Reading Leipzig sentences...')
 	with open(filename,mode='r',encoding='utf-8') as lpzfile:
 		doc = lpzfile.read()
 	print(f'Document length: {len(doc)} chars')
 
-	# 文档层: 替换乱码
 	print(f'Replacing gibberish...')
 	doc = replace_gibberish_doc(doc)
 	doc = replace_gibberish_doc(doc)
 	doc = replace_gibberish_doc(doc)
 	print(f'Document length (gibberish replaced): {len(doc)} chars')
 
-	# 文档层: 分行
 	print(f'Splitting lines...')
 	strlines = doc.split(sep='\n')
 	
-	# 文档层: 删除分行造成的最后一行空行
 	strlines = strlines[:-1]
 	print(f'No. of lines (as strings) {len(strlines)} lines')
 
-	# 句子层: 去除行号
 	print(f'Revmoing line numbers...')
 	strlines = [re.sub('^\d+\t','',line) for line in strlines]
 
-	# 句子层: 替换HTML字符实体
 	print(f'Replacing HTML entities...')
 	strlines = replace_html_char_entity(strlines)
 	print(f'No. of lines (HTML replaced): {len(strlines)} lines')
 
-	# 句子层: 替换乱码
 	print(f'Replacing gibberish...')
 	strlines = replace_gibberish_strlines(strlines)
 	strlines = replace_gibberish_strlines(strlines)
 	strlines = replace_gibberish_strlines(strlines)
 	print(f'Document length (gibberish replaced): {len(" ".join(strlines))} chars')
 
-	# 句子层: 替换非ASCII标点符号
 	print(f'Replacing non-ascii punctuations...')
 	strlines = replace_nonascii_punct(strlines)
 
-	# 句子层: 查找拆分多合一行
-	# print(f'Splitting duplex strlines...')
-	# strlines = split_duplex_lines(strlines)
-	# print(f'Total strlines after splitting: {len(strlines)} ...')
 	
-	# 句子层: 删除多余空格
 	print(f'Removing extra spaces...')
 	strlines = remove_extra_space(strlines)
 	
-	# 句子层: 删除空行
 	print(f'Removing empty lines (as strings)...')
 	strlines = remove_empty_strlines(strlines)
 	print(f'No. of lines (empty lines removed) {len(strlines)} lines')
 
-	# 句子层: 空格分词
 	tklines = [line.split() for line in strlines]
 	return tklines
 
-# 设计流程图见 corprep_sanitize流程图_20211018151342.drawio
-# 上级设计流程图见 corprep_pipeline总体规划_20211024171633.drawio
-# 包含总体规划中的token层
 def sanitize_token(tklines):
 	proc_lines = []
 	for line in tklines:
 		proc_line = []
 		for token in line:
-			# 长度为0: 是
 			if len(token) == 0:
 				pass
-			# 长度为0: 否
 			else:
-				# 包含非法字符: 是 -> 不入列
 				if is_contain_illegal_char(token) == True:
 					pass
-				# 包含非法字符: 否
 				else:
-					# 纯粹token: 是
 					if is_homo(token) == True:
 						if is_only_legalabc(token) == True:
 							proc_line.append(token)
@@ -475,9 +416,7 @@ def sanitize_token(tklines):
 							proc_line.append(token)
 						elif is_only_nonvocal(token) == True:
 							continue
-					# 纯粹token: 否
 					else:
-						# 字母 + 符号混合: 是
 						if is_mix_legalabc_nonvocal(token) == True:
 							if is_contain_onlyone_legalabc_seq(token) == True:
 								proc_line.append(keep_only_legalabc_seq(token))
@@ -495,24 +434,18 @@ def sanitize_token(tklines):
 								proc_line.append(keep_only_contract(token))
 							else:
 								proc_line.append(strip_nonvocal_mix_nonvocal(token))
-						# 字母 + 数字混合: 是
 						elif is_mix_legalabc_num(token):
 							proc_line.append(token)
-						# 数字 + 符号混合: 是
 						elif is_mix_num_nonvocal(token):
 							if is_contain_currency(token):
 								proc_line.append(keep_only_currency(token))
 							else:
 								proc_line.append(strip_nonvocal_mix_nonvocal(token))
-						# 字母 + 数字 + 符号混合: 是
 						elif is_mix_legalabc_num_nonvocal(token):
-							# URL: 是
 							if is_contain_url(token):
 								proc_line.append(replace_url(token))
-							# 包括且一段且仅一段连续字母: 是
 							elif is_contain_onlyone_legalabc_seq(token) == True:
 								proc_line.append(keep_only_legalabc_seq(token))
-							# 非URL 也不包括且一段且仅一段连续字母
 							else:
 								proc_line.append(strip_nonvocal_mix_nonvocal(token))
 						else:
@@ -564,7 +497,6 @@ def stats(tklines):
 	stat_log.append(f'Num + Sym tokens: \t{num_nonvocal_token_cnt}({100*num_nonvocal_token_cnt/token_cnt:.3f}%)')
 	return stat_log
 
-# 设计图见corprep_pipeline总体规划_20211024171633.drawio
 def pipeline(filename,savepath):
 	filenamepobj = Path(filename)
 	savepathpobj = Path(savepath)
@@ -572,10 +504,8 @@ def pipeline(filename,savepath):
 	print('\n')
 	print(f'Processing file {filenamepobj.stem}')
 	print(f"====================PRE-PROCESS({LANG})====================")
-	# 句子层
 	print(f'Loading Leipzig corpora...')
 	proc_lines = load_leipzig(filename)
-	# token层
 	print(f'Logging illegal tokens...')
 	global illegal_tokens
 	illegal_tokens = log_illegal_token(proc_lines)
@@ -583,7 +513,6 @@ def pipeline(filename,savepath):
 	proc_lines = sanitize_token(proc_lines)
 	print(f'Lowering tokens...')
 	proc_lines = lower_token(proc_lines)
-	# 收尾层
 	print(f'Removeing empty tokenized lines')
 	proc_lines = remove_empty_tklines(proc_lines)
 	print(f"====================SUMMARY({LANG})====================")
