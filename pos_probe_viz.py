@@ -25,6 +25,7 @@ if __name__ == '__main__':
 	axe.set_xticks(range(1,13))
 	axe.set_xlabel('attention layer')
 	axe.set_ylabel('accuracy')
+	axe.set_ylim(0,1)
 	axe.plot([1,12],[baseline,baseline],color='k',ls='--',linewidth=1)
 	axe.text(3.5,baseline-0.034,f'local majority baseline: {baseline}')
 	plt.legend()
