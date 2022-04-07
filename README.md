@@ -116,5 +116,4 @@ Usage:
 
 `python pos_probe_viz.py <output-directory-of-attn_rowpos.py>`
 
-
-
+This script reads `accuracies.txt` under the output directory of `attn_rowpos.py`
