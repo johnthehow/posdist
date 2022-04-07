@@ -22,6 +22,7 @@ if __name__ == '__main__':
 		axe.scatter(acc[acc.layer==i].layer,acc[acc.layer==i].acc,s=12)
 		layer_means.append(acc[acc.layer==i].mean().acc)
 	axe.plot(range(1,13),layer_means,marker='^',label='layer mean accuracy')
+	axe.set_xticks(range(1,13))
 	axe.plot([1,12],[baseline,baseline],color='k',ls='--',linewidth=1)
 	axe.text(3.5,baseline-0.034,f'local majority baseline: {baseline}')
 	plt.legend()
