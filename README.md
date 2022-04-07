@@ -8,7 +8,7 @@ All scirpts in this repo require Python 3.6+ to run properly.
 For pre-processing Leipzig news corpora:
 * [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/)
 
-Statistics and visualizations of Linear-position-distribution:
+Statistics and visualizations of linear-position-distribution:
 * [Numpy](http://www.numpy.org/)
 * [SciPy](https://scipy.org/)
 * [MatplotLib](https://matplotlib.org/)
