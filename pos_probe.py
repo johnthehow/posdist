@@ -87,9 +87,9 @@ def train_onehead_probe(dataset_path,layer,head,split_ratio,train_batch_size,tes
 
 	with open(Path(dataset_path).joinpath(f'{layer:02d}_{head:02d}').joinpath('data').joinpath(f'attnrowlabs_{layer:02d}_{head:02d}.pkl'),mode='rb') as pkl:
 		attnrowlabs = pickle.load(pkl)
-	os.mkdir(Path(dataset_path).joinpath(f'{layer:02d}_{head:02d}').joinpath('res')) # 运行结果保存目录
-	os.mkdir(Path(dataset_path).joinpath(f'{layer:02d}_{head:02d}').joinpath('env')) # 运行环境保存路径
-	train_rec_file = open(Path(dataset_path).joinpath(f'{layer:02d}_{head:02d}').joinpath('res').joinpath(f'train_rec_{layer:02d}_{head:02d}_{now}.txt'),mode='w+') # 创建训练记录文件
+	os.mkdir(Path(dataset_path).joinpath(f'{layer:02d}_{head:02d}').joinpath('res'))
+	os.mkdir(Path(dataset_path).joinpath(f'{layer:02d}_{head:02d}').joinpath('env'))
+	train_rec_file = open(Path(dataset_path).joinpath(f'{layer:02d}_{head:02d}').joinpath('res').joinpath(f'train_rec_{layer:02d}_{head:02d}_{now}.txt'),mode='w+')
 
 	print(f'Layer {layer:02d} Head {head:02d}')
 	
