@@ -56,12 +56,12 @@ def complete_tokenizer(sent):
 		return tokendictj
 	
 	tokenized_sent = bert_tokenizer(sent,return_tensors='pt')
-		raw_input_ids = tokenized_sent['input_ids'][0]
-		trimmed_input_ids = raw_input_ids[1:-1]
-		idmap = get_id_map(trimmed_input_ids)
+	raw_input_ids = tokenized_sent['input_ids'][0]
+	trimmed_input_ids = raw_input_ids[1:-1]
+	idmap = get_id_map(trimmed_input_ids)
 	idmap_list = idmap['idmap_list']
 	idmap_dict = idmap['idmap_dict']
-		raw_input_tokens = bert_tokenizer.convert_ids_to_tokens(raw_input_ids)
+	raw_input_tokens = bert_tokenizer.convert_ids_to_tokens(raw_input_ids)
 	trimmed_input_tokens = raw_input_tokens[1:-1]
 	dense_input_tokens_dict = get_onepiece_tokens(trimmed_input_tokens,idmap_list)
 	dense_input_tokens_list = list(dense_input_tokens_dict.values())
