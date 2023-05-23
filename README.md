@@ -84,6 +84,11 @@ Usage:
 
 `python attn_rowpos.py <sentence-length> <maximum-sentences-for-each-word> <corpus-path> <output-path> <words>`
 
+Example Usage:
+```python
+python attn_rowpos.py 18 16000 leipzig_en_all.pkl save_path "the of a about for"
+```
+
  For one word in a sentence, we extract 12×12 attention rows from BERT (corresponding to 12×12 attention heads). This script put generated attention rows and position labs (as a combined NumPy array) in separated directories (named after layer and head number):
 
 Sample output:
