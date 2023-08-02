@@ -1,8 +1,9 @@
 # Linear-position-distribution Analysis
 This repository contains code to reproduce the results in paper *Linear Positions in Neural Network Language Models: A Novel Path to Learning and Representing Linguistic Regularities*.
 It includes code for pre-processing Leipzig news corpora, quantitative and visualized analysis along with probing classifiers for linear-position-distributions.
+<div style="width: 60%; height: 60%">
 ![Position Probe](pos_probe.png)
-
+</div>
 ## Requirements
 All scirpts in this repo require Python 3.6+ to run properly.
 
