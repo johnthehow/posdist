@@ -64,7 +64,7 @@ and_attn_row_h0310_32_mean = and_attn_row_h0310_32.mean(axis=0).tolist()
 and_attn_row_h0310_36_mean = and_attn_row_h0310_36.mean(axis=0).tolist()
 
 fig = plt.figure(dpi=300)
-ax = subplots()
+ax = fig.subplots()
 
 ax.plot([i+1 for i in range(12)], and_attn_row_h0301_12_mean, label='12')
 ax.plot([i+1 for i in range(16)], and_attn_row_h0301_16_mean, label='12')
@@ -83,7 +83,7 @@ plt.savefig(r'C:\Users\dell\Desktop\thehow\TASKS\POSDIST\VIS\0301\and_h0301_12_3
 plt.clf()
 
 fig = plt.figure(dpi=300)
-ax = subplots()
+ax = fig.subplots()
 
 ax.plot([i+1 for i in range(12)], and_attn_row_h0301_12_mean, label='12')
 ax.plot([i+1 for i in range(16)], and_attn_row_h0301_16_mean, label='12')
