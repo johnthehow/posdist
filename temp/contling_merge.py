@@ -39,13 +39,13 @@ and_attn_row_h0301_28 = and_attn_rowlabs_h0301_28[:,:28]
 and_attn_row_h0301_32 = and_attn_rowlabs_h0301_32[:,:32]
 and_attn_row_h0301_36 = and_attn_rowlabs_h0301_36[:,:36]
 
-and_attn_row_h3010_12 = and_attn_rowlabs_h3010_12[:,:12]
-and_attn_row_h3010_16 = and_attn_rowlabs_h3010_16[:,:16]
-and_attn_row_h3010_20 = and_attn_rowlabs_h3010_20[:,:20]
-and_attn_row_h3010_24 = and_attn_rowlabs_h3010_24[:,:24]
-and_attn_row_h3010_28 = and_attn_rowlabs_h3010_28[:,:28]
-and_attn_row_h3010_32 = and_attn_rowlabs_h3010_32[:,:32]
-and_attn_row_h3010_36 = and_attn_rowlabs_h3010_36[:,:36]
+and_attn_row_h3010_12 = and_attn_rowlabs_h0310_12[:,:12]
+and_attn_row_h3010_16 = and_attn_rowlabs_h0310_16[:,:16]
+and_attn_row_h3010_20 = and_attn_rowlabs_h0310_20[:,:20]
+and_attn_row_h3010_24 = and_attn_rowlabs_h0310_24[:,:24]
+and_attn_row_h3010_28 = and_attn_rowlabs_h0310_28[:,:28]
+and_attn_row_h3010_32 = and_attn_rowlabs_h0310_32[:,:32]
+and_attn_row_h3010_36 = and_attn_rowlabs_h0310_36[:,:36]
 
 and_attn_row_h0301_12_mean = and_attn_row_h0301_12.mean(axis=0).tolist()
 and_attn_row_h0301_16_mean = and_attn_row_h0301_16.mean(axis=0).tolist()
@@ -66,18 +66,37 @@ and_attn_row_h0310_36_mean = and_attn_row_h0310_36.mean(axis=0).tolist()
 fig = plt.figure(dpi=300)
 ax = subplots()
 
-ax.plot([i+1 for i in range(12)], and_attn_row_h0301_12_mean)
-ax.plot([i+1 for i in range(16)], and_attn_row_h0301_16_mean)
-ax.plot([i+1 for i in range(20)], and_attn_row_h0301_20_mean)
-ax.plot([i+1 for i in range(24)], and_attn_row_h0301_24_mean)
-ax.plot([i+1 for i in range(28)], and_attn_row_h0301_28_mean)
-ax.plot([i+1 for i in range(32)], and_attn_row_h0301_32_mean)
-ax.plot([i+1 for i in range(36)], and_attn_row_h0301_36_mean)
+ax.plot([i+1 for i in range(12)], and_attn_row_h0301_12_mean, label='12')
+ax.plot([i+1 for i in range(16)], and_attn_row_h0301_16_mean, label='12')
+ax.plot([i+1 for i in range(20)], and_attn_row_h0301_20_mean, label='12')
+ax.plot([i+1 for i in range(24)], and_attn_row_h0301_24_mean, label='12')
+ax.plot([i+1 for i in range(28)], and_attn_row_h0301_28_mean, label='12')
+ax.plot([i+1 for i in range(32)], and_attn_row_h0301_32_mean, label='12')
+ax.plot([i+1 for i in range(36)], and_attn_row_h0301_36_mean, label='12')
+ax.set_xticks([i for i in range(1,37)])
+ax.set_xticklabels([i for i in range(1,37)],rotation='vertical')
+ax.set_xlabel('linear position in sentence')
+ax.set_ylabel('attention score')
+ax.legend(title = 'Sent Len')
 
 plt.savefig(r'C:\Users\dell\Desktop\thehow\TASKS\POSDIST\VIS\0301\and_h0301_12_36.png', format='png')
 plt.clf()
 
 fig = plt.figure(dpi=300)
 ax = subplots()
+
+ax.plot([i+1 for i in range(12)], and_attn_row_h0301_12_mean, label='12')
+ax.plot([i+1 for i in range(16)], and_attn_row_h0301_16_mean, label='12')
+ax.plot([i+1 for i in range(20)], and_attn_row_h0301_20_mean, label='12')
+ax.plot([i+1 for i in range(24)], and_attn_row_h0301_24_mean, label='12')
+ax.plot([i+1 for i in range(28)], and_attn_row_h0301_28_mean, label='12')
+ax.plot([i+1 for i in range(32)], and_attn_row_h0301_32_mean, label='12')
+ax.plot([i+1 for i in range(36)], and_attn_row_h0301_36_mean, label='12')
+ax.set_xticks([i for i in range(1,37)])
+ax.set_xticklabels([i for i in range(1,37)],rotation='vertical')
+ax.set_xlabel('linear position in sentence')
+ax.set_ylabel('attention score')
+ax.legend(title = 'Sent Len')
+
 plt.savefig(r'C:\Users\dell\Desktop\thehow\TASKS\POSDIST\VIS\0310\and_h0310_12_36.png', format='png')
 plt.clf()
