@@ -39,13 +39,13 @@ and_attn_row_h0301_28 = and_attn_rowlabs_h0301_28[:,:28]
 and_attn_row_h0301_32 = and_attn_rowlabs_h0301_32[:,:32]
 and_attn_row_h0301_36 = and_attn_rowlabs_h0301_36[:,:36]
 
-and_attn_row_h3010_12 = and_attn_rowlabs_h0310_12[:,:12]
-and_attn_row_h3010_16 = and_attn_rowlabs_h0310_16[:,:16]
-and_attn_row_h3010_20 = and_attn_rowlabs_h0310_20[:,:20]
-and_attn_row_h3010_24 = and_attn_rowlabs_h0310_24[:,:24]
-and_attn_row_h3010_28 = and_attn_rowlabs_h0310_28[:,:28]
-and_attn_row_h3010_32 = and_attn_rowlabs_h0310_32[:,:32]
-and_attn_row_h3010_36 = and_attn_rowlabs_h0310_36[:,:36]
+and_attn_row_h0310_12 = and_attn_rowlabs_h0310_12[:,:12]
+and_attn_row_h0310_16 = and_attn_rowlabs_h0310_16[:,:16]
+and_attn_row_h0310_20 = and_attn_rowlabs_h0310_20[:,:20]
+and_attn_row_h0310_24 = and_attn_rowlabs_h0310_24[:,:24]
+and_attn_row_h0310_28 = and_attn_rowlabs_h0310_28[:,:28]
+and_attn_row_h0310_32 = and_attn_rowlabs_h0310_32[:,:32]
+and_attn_row_h0310_36 = and_attn_rowlabs_h0310_36[:,:36]
 
 and_attn_row_h0301_12_mean = and_attn_row_h0301_12.mean(axis=0).tolist()
 and_attn_row_h0301_16_mean = and_attn_row_h0301_16.mean(axis=0).tolist()
