@@ -48,13 +48,13 @@ and_attn_row_h0310_28 = and_attn_rowlabs_h0310_28[:,:28]
 and_attn_row_h0310_32 = and_attn_rowlabs_h0310_32[:,:32]
 and_attn_row_h0310_36 = and_attn_rowlabs_h0310_36[:,:36]
 
-and_attn_row_h0301_12_mean = and_attn_row_h0301_12.mean(axis=0).tolist()
-and_attn_row_h0301_16_mean = and_attn_row_h0301_16.mean(axis=0).tolist()
-and_attn_row_h0301_20_mean = and_attn_row_h0301_20.mean(axis=0).tolist()
-and_attn_row_h0301_24_mean = and_attn_row_h0301_24.mean(axis=0).tolist()
-and_attn_row_h0301_28_mean = and_attn_row_h0301_28.mean(axis=0).tolist()
-and_attn_row_h0301_32_mean = and_attn_row_h0301_32.mean(axis=0).tolist()
-and_attn_row_h0301_36_mean = and_attn_row_h0301_36.mean(axis=0).tolist()
+and_attn_row_h0301_12_mean = and_attn_row_h0301_12.mean(axis=0)
+and_attn_row_h0301_16_mean = and_attn_row_h0301_16.mean(axis=0)
+and_attn_row_h0301_20_mean = and_attn_row_h0301_20.mean(axis=0)
+and_attn_row_h0301_24_mean = and_attn_row_h0301_24.mean(axis=0)
+and_attn_row_h0301_28_mean = and_attn_row_h0301_28.mean(axis=0)
+and_attn_row_h0301_32_mean = and_attn_row_h0301_32.mean(axis=0)
+and_attn_row_h0301_36_mean = and_attn_row_h0301_36.mean(axis=0)
 
 and_attn_row_h0301_12_mean = torch.cat((and_attn_row_h0301_12_mean,torch.tensor(0).reshape(1)))
 and_attn_row_h0301_16_mean = torch.cat((and_attn_row_h0301_16_mean,torch.tensor(0).reshape(1)))
@@ -64,13 +64,13 @@ and_attn_row_h0301_28_mean = torch.cat((and_attn_row_h0301_28_mean,torch.tensor(
 and_attn_row_h0301_32_mean = torch.cat((and_attn_row_h0301_32_mean,torch.tensor(0).reshape(1)))
 and_attn_row_h0301_36_mean = torch.cat((and_attn_row_h0301_36_mean,torch.tensor(0).reshape(1)))
 
-and_attn_row_h0310_12_mean = and_attn_row_h0310_12.mean(axis=0).tolist()
-and_attn_row_h0310_16_mean = and_attn_row_h0310_16.mean(axis=0).tolist()
-and_attn_row_h0310_20_mean = and_attn_row_h0310_20.mean(axis=0).tolist()
-and_attn_row_h0310_24_mean = and_attn_row_h0310_24.mean(axis=0).tolist()
-and_attn_row_h0310_28_mean = and_attn_row_h0310_28.mean(axis=0).tolist()
-and_attn_row_h0310_32_mean = and_attn_row_h0310_32.mean(axis=0).tolist()
-and_attn_row_h0310_36_mean = and_attn_row_h0310_36.mean(axis=0).tolist()
+and_attn_row_h0310_12_mean = and_attn_row_h0310_12.mean(axis=0)
+and_attn_row_h0310_16_mean = and_attn_row_h0310_16.mean(axis=0)
+and_attn_row_h0310_20_mean = and_attn_row_h0310_20.mean(axis=0)
+and_attn_row_h0310_24_mean = and_attn_row_h0310_24.mean(axis=0)
+and_attn_row_h0310_28_mean = and_attn_row_h0310_28.mean(axis=0)
+and_attn_row_h0310_32_mean = and_attn_row_h0310_32.mean(axis=0)
+and_attn_row_h0310_36_mean = and_attn_row_h0310_36.mean(axis=0)
 
 and_attn_row_h0310_12_mean = torch.cat((and_attn_row_h0310_12_mean,torch.tensor(0).reshape(1)))
 and_attn_row_h0310_16_mean = torch.cat((and_attn_row_h0310_16_mean,torch.tensor(0).reshape(1)))
