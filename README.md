@@ -2,7 +2,7 @@
 This repository contains code to reproduce the results in paper *Linear Positions in Neural Network Language Models: A Novel Path to Learning and Representing Linguistic Regularities*.
 It includes code for pre-processing Leipzig news corpora, quantitative and visualized analysis along with probing classifiers for linear-position-distributions.
 
-![Position Probe](pos_probe4.png)
+![Position Probe](pos_probe.png)
 
 ## Requirements
 All scirpts in this repo require Python 3.6+ to run properly.
