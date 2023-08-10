@@ -73,12 +73,25 @@ Usage:
 `python posdist_stat_years.py  <start-sentence-length> <end-sentence-length> <KDE-bandwidth> <corpus-dir> <word-list>`
 
 ### Visualizations
-`posdist_viz_lengths.py` produces the figure showing "pattern consistency over sentence lengths" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 1. of the paper).
+`posdist_viz_lengths.py` produces the figure showing "pattern consistency over sentence lengths" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 2. of the paper).
 
-`posdist_viz_years.py` produces the figure demonstrating "pattern consistency over year-of-collection" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 2. of the paper).
+`posdist_viz_years.py` produces the figure demonstrating "pattern consistency over year-of-collection" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 3. of the paper).
 
-`posdist_viz_meaning.py` produces the figure exhibiting "pattern consistency for words of similar meanings" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 3. of the paper).
+`posdist_viz_meaning.py` produces the figure exhibiting "pattern consistency for words of similar meanings" for linear-position-distributions of function words. Follow the prompts to get the figure (as Fig. 4. of the paper).
 
+`posprobe_viz.py` produces the figure exhibiting "classification accuracy of trained probing classifiers on attention-heads in 12 attention". Follow the prompts to get the figure (as Fig. 5. of the paper).
+
+`attndis_viz.py` produces the figure exhibiting "mean attention score of target word over sentence lengths". Follow the prompts to get the figure (as Fig. 6. of the paer)
+
+Usage:
+
+`python attndis_viz.py <attention_rows_and_labs_in_pikle> <save_path_of_figure> <word> <layer_no> <head_no>`
+
+Example Usage:
+```bash
+python attndis_viz.py ~/attnrowlabs ~/viz and 3 1
+
+```
 ## Extracting attention weights for words in sentences
 Run `attn_rowpos.py` to get the attention weights and linear postions corresponding to words in sentences.
 
@@ -87,7 +100,7 @@ Usage:
 `python attn_rowpos.py <sentence-length> <maximum-sentences-for-each-word> <corpus-path> <output-path> <words>`
 
 Example Usage:
-```python
+```bash
 python attn_rowpos.py 18 16000 leipzig_en_all.pkl save_path "the of a about for"
 ```
 
