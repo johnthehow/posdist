@@ -148,4 +148,4 @@ if __name__ == '__main__':
 	corpora_es = corpora_loader(year_avail_es,f'{corpora_dir_es.joinpath(filelist_es[0])}')
 	corpora = [corpora_en,corpora_de,corpora_es]
 
-	draw_line_posdist_word_len_years_panels(3,1,sent_len,words,titles,corpora,year_selected,year_avail,'png')
+	draw_line_posdist_word_len_years_panels(1,3,sent_len,words,titles,corpora,year_selected,year_avail,'png')
