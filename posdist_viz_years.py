@@ -58,18 +58,21 @@ def posdist_word(word,corpus_pkl,sent_length):
 def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,corpora,year_selected,year_avail,img_fmt):
 	fig = plt.figure(figsize=(5,15),dpi=300)
 	axes = fig.subplots(rows,cols).flatten()
+	markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
+	linestyle_cnt = iter(range(7))
 	word_cnt = 0
 	for word in words:
 		for year in year_selected[word_cnt]:
 			corpus_idx = year_avail[word_cnt].index(year)
 			corpus = corpora[word_cnt][corpus_idx]
+
 			xs = [i for i in range(1,sent_length+1)]
 			ys = posdist_word(word,corpus,sent_length)['fd_density']
 			xticks = [i for i in range(1,sent_length+1)]
 			axes[word_cnt].set_xlabel('linear position in sentence')
 			axes[word_cnt].set_ylabel('probability')
 			axes[word_cnt].set_xticks(xticks)
-			axes[word_cnt].plot(xs,ys,label=str(year))
+			axes[word_cnt].plot(xs,ys,label=str(year), marker=next(markers), fillstyle='none', linewidth=1, linestyle=(0,(7,next(linestyle_cnt))))
 			axes[word_cnt].legend(title='year')
 			axes[word_cnt].set_title(titles[word_cnt])
 		word_cnt += 1
@@ -79,10 +82,12 @@ def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,c
 	return
 
 if __name__ == '__main__':
+	plt.rcParams["font.sans-serif"]=["SimHei"]
+	plt.rcParams["axes.unicode_minus"] = False
 	sent_len = int(input('Sentence length: '))
-	corpora_dir_en = Path(input('Path for English corpora: '))
-	corpora_dir_de = Path(input('Path for German corpora: '))
-	corpora_dir_es = Path(input('Path for Spanish corpora: '))
+	corpora_dir_en = Path(input('Path for English pickle corpora: '))
+	corpora_dir_de = Path(input('Path for German pickle corpora: '))
+	corpora_dir_es = Path(input('Path for Spanish pickle corpora: '))
 
 	filelist_en = os.listdir(corpora_dir_en)
 	filelist_de = os.listdir(corpora_dir_de)
