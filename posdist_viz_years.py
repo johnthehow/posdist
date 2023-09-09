@@ -60,9 +60,10 @@ def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,c
 	axes = fig.subplots(rows,cols).flatten()
 	word_cnt = 0
 	for word in words: # 每种语言的一个单词
-		for year in year_selected[word_cnt]: # [[2005, 2006], [2005, 2006], [2007,2008]]
-			markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
-			linestyle_cnt = iter(range(7))
+		markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
+		linestyle_cnt = iter(range(7))
+		for year in year_selected[word_cnt]: # year_selected: [[2005, 2006], [2005, 2006], [2007,2008]] year: 2005
+
 			corpus_idx = year_avail[word_cnt].index(year)
 			corpus = corpora[word_cnt][corpus_idx]
 			xs = [i for i in range(1,sent_length+1)]
@@ -147,4 +148,4 @@ if __name__ == '__main__':
 	corpora_es = corpora_loader(year_avail_es,f'{corpora_dir_es.joinpath(filelist_es[0])}')
 	corpora = [corpora_en,corpora_de,corpora_es]
 
-	draw_line_posdist_word_len_years_panels(1,3,sent_len,words,titles,corpora,year_selected,year_avail,'png')
+	draw_line_posdist_word_len_years_panels(3,1,sent_len,words,titles,corpora,year_selected,year_avail,'png')
