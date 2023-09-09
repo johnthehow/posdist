@@ -82,8 +82,8 @@ def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,c
 	return
 
 if __name__ == '__main__':
-	plt.rcParams["font.sans-serif"]=["SimHei"]
-	plt.rcParams["axes.unicode_minus"] = False
+	# plt.rcParams["font.sans-serif"]=["SimHei"]
+	# plt.rcParams["axes.unicode_minus"] = False
 	sent_len = int(input('Sentence length: '))
 	corpora_dir_en = Path(input('Path for English pickle corpora: '))
 	corpora_dir_de = Path(input('Path for German pickle corpora: '))
