@@ -115,14 +115,16 @@ def draw_line_posdist_meaning_langs_precalc_panels(wordlists,legends,sent_length
 	fig = plt.figure(figsize = (16,14),dpi=300)
 	axes = fig.subplots(2,2).flatten()
 	axes_cnt = 0
-	for wordlist in wordlists:
+	for wordlist in wordlists: # wordlists: [[and, und, et], [or, oder, ou], ...]
+		markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
+		linestyle_cnt = iter(range(7))
 		word_cnt = 0
 		for word in wordlist:
 			xs = [i+1 for i in range(sent_length)]
 			ys = corpora_databases[word_cnt][sent_length][word]
 			xticks = [i for i in range(1,sent_length+1)]
-			axes[axes_cnt].plot(xs,ys)
-			axes[axes_cnt].plot(xs,ys,label=legends[axes_cnt][word_cnt])
+			# axes[axes_cnt].plot(xs,ys)
+			axes[axes_cnt].plot(xs,ys,label=legends[axes_cnt][word_cnt],marker=next(markers), fillstyle='none', linewidth=1, linestyle=(0,(7,next(linestyle_cnt))))
 			axes[axes_cnt].legend(title='word')
 			word_cnt += 1
 		axes[axes_cnt].set_xticks(xticks)
