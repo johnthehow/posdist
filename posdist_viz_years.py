@@ -58,14 +58,13 @@ def posdist_word(word,corpus_pkl,sent_length):
 def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,corpora,year_selected,year_avail,img_fmt):
 	fig = plt.figure(figsize=(5,15),dpi=300)
 	axes = fig.subplots(rows,cols).flatten()
-	markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
-	linestyle_cnt = iter(range(7))
 	word_cnt = 0
-	for word in words:
-		for year in year_selected[word_cnt]:
+	for word in words: # 每种语言的一个单词
+		for year in year_selected[word_cnt]: # [[2005, 2006], [2005, 2006], [2007,2008]]
+			markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
+			linestyle_cnt = iter(range(7))
 			corpus_idx = year_avail[word_cnt].index(year)
 			corpus = corpora[word_cnt][corpus_idx]
-
 			xs = [i for i in range(1,sent_length+1)]
 			ys = posdist_word(word,corpus,sent_length)['fd_density']
 			xticks = [i for i in range(1,sent_length+1)]
