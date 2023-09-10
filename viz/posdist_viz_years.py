@@ -69,7 +69,7 @@ def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,c
 	fig = plt.figure(figsize=(5,15),dpi=300)
 	axes = fig.subplots(rows,cols).flatten()
 	word_cnt = 0
-	image_data_container = create_nested_dict([[0,1,2],[0,1,2,3]], 1)
+	# image_data_container = create_nested_dict([[0,1,2],[0,1,2,3]], 1)
 	for word in words: # 每种语言的一个单词
 		markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
 		linestyle_cnt = iter(range(7))
@@ -84,8 +84,8 @@ def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,c
 			axes[word_cnt].set_xlabel('linear position in sentence')
 			axes[word_cnt].set_ylabel('probability')
 			axes[word_cnt].set_xticks(xticks)
-			image_data = axes[word_cnt].plot(xs,ys,label=str(year), marker=next(markers), fillstyle='none', linewidth=1, linestyle=(0,(7,next(linestyle_cnt))))
-			image_data_container[word_cnt][year_cnt] = image_data[0]			
+			axes[word_cnt].plot(xs,ys,label=str(year), marker=next(markers), fillstyle='none', linewidth=1, linestyle=(0,(7,next(linestyle_cnt))))
+			# image_data_container[word_cnt][year_cnt] = image_data[0]			
 			axes[word_cnt].legend(title='year')
 			axes[word_cnt].set_title(titles[word_cnt])
 			year_cnt += 1
@@ -162,10 +162,10 @@ if __name__ == '__main__':
 	corpora_es = corpora_loader(year_avail_es,f'{corpora_dir_es.joinpath(filelist_es[0])}')
 	corpora = [corpora_en,corpora_de,corpora_es]
 
-	image_data_ctn = draw_line_posdist_word_len_years_panels(3,1,sent_len,words,titles,corpora,year_selected,year_avail,'png')
+	draw_line_posdist_word_len_years_panels(3,1,sent_len,words,titles,corpora,year_selected,year_avail,'png')
 
-	now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-	filename = Path('D:/').joinpath(now+'_imagedata.pkl')
-	with open(filename, mode='wb') as file:
-		pickle.dump(image_data_ctn, file)
-	print(f'image raw data saved at {filename}')
+	# now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+	# filename = Path('D:/').joinpath(now+'_imagedata.pkl')
+	# with open(filename, mode='wb') as file:
+	# 	pickle.dump(image_data_ctn, file)
+	# print(f'image raw data saved at {filename}')

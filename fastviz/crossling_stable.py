@@ -2,7 +2,7 @@ import pickle
 import matplotlib.pyplot as plt
 
 def draw():
-	with open('crossling_stable_20230911010449.pkl', mode='rb') as file:
+	with open('../data/specific/crossling_stable.pkl', mode='rb') as file:
 		database = pickle.load(file)
 	langs = ['en', 'de', 'fr', 'es', 'ru', 'cz']
 	langs_full = ['English', 'German', 'French', 'Spanish', 'Russian', 'Czech']
@@ -31,7 +31,7 @@ def draw():
 		axes[grp_cnt].legend(title='word', fontsize=18, title_fontsize=18)
 		grp_cnt += 1
 	axes[0].legend(title='word', fontsize=18, title_fontsize=18, loc=(0.4,0.03))
-	plt.savefig('crossling_stable.png',format='png')
+	plt.savefig('../images/crossling_stable.png',format='png')
 	plt.close()
 
 draw()

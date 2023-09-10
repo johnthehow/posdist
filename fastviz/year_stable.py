@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import pickle
 
-with open('year_stable_20230911011058.pkl', mode='rb') as file:
+with open('../data/specific/year_stable.pkl', mode='rb') as file:
 	image_data = pickle.load(file)
 
 words = ['but', 'auf', 'los']
@@ -13,7 +13,7 @@ years_all = [years_en, years_de, years_es]
 
 fig = plt.figure(figsize=(17.5,5.2),dpi=300, tight_layout=False)
 axes = fig.subplots(1,3).flatten()
-
+props = dict(boxstyle='square', facecolor='white', alpha=0.5)
 word_cnt = 0
 for word in words: # 每种语言的一个单词
 	markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
@@ -28,8 +28,10 @@ for word in words: # 每种语言的一个单词
 		axes[word_cnt].set_ylabel('probability', fontsize=14)
 		year_cnt += 1
 	axes[word_cnt].legend(title='year', fontsize=14, title_fontsize=14)
+	axes[word_cnt].text(0.5, 0.95, f'{words[word_cnt]}\n({langs[word_cnt]})', horizontalalignment='center',transform=axes[word_cnt].transAxes, fontsize=14, verticalalignment='top', bbox=props)
 	word_cnt += 1
+axes[2].legend(title='year', fontsize=14, title_fontsize=14, loc=(0.35,0.02))
 fig.subplots_adjust(wspace=0.2)
-plt.savefig('year_stable.png',format='png')
+plt.savefig('../images/year_stable.png',format='png')
 plt.close()
 
