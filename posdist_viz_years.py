@@ -54,12 +54,22 @@ def posdist_word(word,corpus_pkl,sent_length):
 	return {'fd':fd,'log':wordposlog,'fd_density':fd_density,'fd_count':fd_count}
 
 
+def create_nested_dict(lists,idx): # 20230315092535
+	lists = list(reversed(lists))
+	def rec(lists,idx): # 20230315092535
+		if idx>0:
+			listpop = lists[idx]
+			return {i:rec(lists,idx-1) for i in listpop}
+		else:
+			listpop = lists[idx]
+			return {i:[] for i in listpop}
+	return rec(lists, idx)
 
 def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,corpora,year_selected,year_avail,img_fmt):
 	fig = plt.figure(figsize=(5,15),dpi=300)
 	axes = fig.subplots(rows,cols).flatten()
 	word_cnt = 0
-	image_data_container = [[None]*4]*3
+	image_data_container = create_nested_dict([[0,1,2],[0,1,2,3]], idx)
 	for word in words: # 每种语言的一个单词
 		markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
 		linestyle_cnt = iter(range(7))
@@ -75,7 +85,7 @@ def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,c
 			axes[word_cnt].set_ylabel('probability')
 			axes[word_cnt].set_xticks(xticks)
 			image_data = axes[word_cnt].plot(xs,ys,label=str(year), marker=next(markers), fillstyle='none', linewidth=1, linestyle=(0,(7,next(linestyle_cnt))))
-			image_data_container[word_cnt][year_cnt] = image_data			
+			image_data_container[word_cnt][year_cnt] = image_data[0]			
 			axes[word_cnt].legend(title='year')
 			axes[word_cnt].set_title(titles[word_cnt])
 			year_cnt += 1
