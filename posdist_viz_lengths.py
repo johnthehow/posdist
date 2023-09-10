@@ -111,17 +111,29 @@ def precalc_posdist_vwords_vlens_log(wordlist,corpus,start_len,end_len):
 		len_word_dict[length] = len_dict
 	return len_word_dict
 
+def create_nested_dict(lists,idx): # 20230315092535
+	lists = list(reversed(lists))
+	def rec(lists,idx): # 20230315092535
+		if idx>0:
+			listpop = lists[idx]
+			return {i:rec(lists,idx-1) for i in listpop}
+		else:
+			listpop = lists[idx]
+			return {i:[] for i in listpop}
+	return rec(lists, idx)
 
 def draw_line_posdist_word_vlens_precalc_panels(rows,cols,words,titles,posdist_density_databases,save_path):
 	markerstyle = ['+','x','D','s','o','^','v']
 	fig = plt.figure(figsize=(15,16),dpi=300)
 	axes = fig.subplots(rows,cols).flatten()
+	image_data_container = create_nested_dict([[i for i in range(6)],[j for j in range(12,37,4)]], 1)
 	for i in range(rows*cols):
 		style_cnt = 0
 		for length in range(12,37,4):
 			ys = posdist_density_databases[i][length][words[i]]
 			xs = [j+1 for j in range(length)]
-			axes[i].plot(xs,ys,label=str(length),marker=markerstyle[style_cnt],markersize=4,fillstyle='none',linewidth=1,linestyle=(0,(7,style_cnt)))
+			image_data = axes[i].plot(xs,ys,label=str(length),marker=markerstyle[style_cnt],markersize=4,fillstyle='none',linewidth=1,linestyle=(0,(7,style_cnt)))
+			image_data_container[i][length] = image_data[0]
 			style_cnt += 1
 		axes[i].set_xticks([i for i in range(1,37)])
 		axes[i].set_xticklabels([i for i in range(1,37)],rotation='vertical')
@@ -132,7 +144,7 @@ def draw_line_posdist_word_vlens_precalc_panels(rows,cols,words,titles,posdist_d
 	now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 	plt.savefig(f'{save_path.joinpath(now)}.png',format='png')
 	print(f'Plot saved as {save_path.joinpath(now)}.png')
-	return
+	return image_data_container
 
 if __name__ == '__main__':
 
@@ -169,4 +181,8 @@ if __name__ == '__main__':
 	pdd_cz = precalc_posdist_vwords_vlens_fd_density([word_cz],corpus_cz,12,37)
 
 	posdist_density_databases = [pdd_en, pdd_de, pdd_fr, pdd_es, pdd_ru, pdd_cz]
-	draw_line_posdist_word_vlens_precalc_panels(3,2,words,titles,posdist_density_databases,save_path)
+	res = draw_line_posdist_word_vlens_precalc_panels(3,2,words,titles,posdist_density_databases,save_path)
+
+	with open('posdist_viz_lengths_image_data.pkl', mode='wb') as file:
+		pickle.dump(res, file)
+	print(f'lengths image data saved at same directory')
