@@ -69,7 +69,7 @@ def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,c
 	fig = plt.figure(figsize=(5,15),dpi=300)
 	axes = fig.subplots(rows,cols).flatten()
 	word_cnt = 0
-	image_data_container = create_nested_dict([[0,1,2],[0,1,2,3]], idx)
+	image_data_container = create_nested_dict([[0,1,2],[0,1,2,3]], 1)
 	for word in words: # 每种语言的一个单词
 		markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
 		linestyle_cnt = iter(range(7))
