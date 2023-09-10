@@ -122,7 +122,7 @@ def create_nested_dict(lists,idx): # 20230315092535
 			return {i:[] for i in listpop}
 	return rec(lists, idx)
 
-def draw_line_posdist_word_vlens_precalc_panels(rows,cols,words,titles,posdist_density_databases,save_path):
+def draw_line_posdist_word_vlens_precalc_panels(rows,cols,words,titles,posdist_density_databases):
 	markerstyle = ['+','x','D','s','o','^','v']
 	fig = plt.figure(figsize=(15,16),dpi=300)
 	axes = fig.subplots(rows,cols).flatten()
@@ -142,29 +142,40 @@ def draw_line_posdist_word_vlens_precalc_panels(rows,cols,words,titles,posdist_d
 		axes[i].set_title(titles[i])
 		axes[i].legend(title = 'Sent Len')
 	now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-	plt.savefig(f'{save_path.joinpath(now)}.png',format='png')
-	print(f'Plot saved as {save_path.joinpath(now)}.png')
+	plt.savefig(f'{now}.png',format='png')
+	print(f'Plot saved as {now}.png')
 	return image_data_container
 
 if __name__ == '__main__':
 
-	word_en = input('English word: ')
-	word_de = input('German word: ')
-	word_fr = input('French word: ')
-	word_es = input('Spanish word: ')
-	word_ru = input('Russian word: ')
-	word_cz = input('Czech word: ')
+	# word_en = input('English word: ')
+	word_en = 'and'
+	# word_de = input('German word: ')
+	word_de = 'für'
+	# word_fr = input('French word: ')
+	word_fr = 'les'
+	# word_es = input('Spanish word: ')
+	word_es = 'pero'
+	# word_ru = input('Russian word: ')
+	word_ru = 'на'
+	# word_cz = input('Czech word: ')
+	word_cz = 'nebo'
 	words = [word_en, word_de, word_fr, word_es, word_ru, word_cz]
 	titles = [f'{word_en} (English)', f'{word_de} (German)', f'{word_fr} (French)', f'{word_es} (Spanish)', f'{word_ru} (Russian)', f'{word_cz} (Czech)']
 
-	corpus_path_en = Path(input('Path for English concatenated corpus: '))
-	corpus_path_de = Path(input('Path for German concatenated corpus: '))
-	corpus_path_fr = Path(input('Path for French concatenated corpus: '))
-	corpus_path_es = Path(input('Path for Spanish concatenated corpus: '))
-	corpus_path_ru = Path(input('Path for Russian concatenated corpus: '))
-	corpus_path_cz = Path(input('Path for Czech concatenated corpus: '))
-
-	save_path = Path(input('Path for result image: '))
+	# corpus_path_en = Path(input('Path for English concatenated corpus: '))
+	corpus_path_en = Path(r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\EN\CODENRES\RES\CAT\en_lepzig_all.pkl')
+	# corpus_path_de = Path(input('Path for German concatenated corpus: '))
+	corpus_path_de = Path(r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\DE\CODENRES\RES\CAT\de_lepzig_all.pkl')
+	# corpus_path_fr = Path(input('Path for French concatenated corpus: '))
+	corpus_path_fr = Path(r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\FR\CODENRES\RES\CAT\fr_lepzig_all.pkl')
+	# corpus_path_es = Path(input('Path for Spanish concatenated corpus: '))
+	corpus_path_es = Path(r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\ES\CODENRES\RES\CAT\es_lepzig_all.pkl')
+	# corpus_path_ru = Path(input('Path for Russian concatenated corpus: '))
+	corpus_path_ru = Path(r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\RU\CODENRES\RES\CAT\ru_lepzig_all.pkl')
+	# corpus_path_cz = Path(input('Path for Czech concatenated corpus: '))
+	corpus_path_cz = Path(r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\CZ\CODENRES\RES\CAT\cz_lepzig_all.pkl')
+	# save_path = Path(input('Path for result image: '))
 
 	corpus_en = corpus_loader(corpus_path_en)
 	corpus_de = corpus_loader(corpus_path_de)
