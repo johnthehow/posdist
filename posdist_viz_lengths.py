@@ -192,7 +192,7 @@ if __name__ == '__main__':
 	pdd_cz = precalc_posdist_vwords_vlens_fd_density([word_cz],corpus_cz,12,37)
 
 	posdist_density_databases = [pdd_en, pdd_de, pdd_fr, pdd_es, pdd_ru, pdd_cz]
-	res = draw_line_posdist_word_vlens_precalc_panels(3,2,words,titles,posdist_density_databases,save_path)
+	res = draw_line_posdist_word_vlens_precalc_panels(3,2,words,titles,posdist_density_databases)
 
 	with open('posdist_viz_lengths_image_data.pkl', mode='wb') as file:
 		pickle.dump(res, file)
