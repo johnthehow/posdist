@@ -85,7 +85,7 @@ def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,c
 			axes[word_cnt].set_ylabel('probability')
 			axes[word_cnt].set_xticks(xticks)
 			image_data = axes[word_cnt].plot(xs,ys,label=str(year), marker=next(markers), fillstyle='none', linewidth=1, linestyle=(0,(7,next(linestyle_cnt))))
-			image_data_container[word_cnt][year_cnt] = image_data[0]			
+			image_data_container[word_cnt][year_cnt] = image_data[0].get_data()			
 			axes[word_cnt].legend(title='year')
 			axes[word_cnt].set_title(titles[word_cnt])
 			year_cnt += 1
@@ -99,7 +99,7 @@ def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,c
 if __name__ == '__main__':
 	# plt.rcParams["font.sans-serif"]=["SimHei"]
 	# plt.rcParams["axes.unicode_minus"] = False
-	
+
 	# sent_len = int(input('Sentence length: '))
 	sent_len = 20
 	# corpora_dir_en = Path(input('Path for English pickle corpora: '))
