@@ -180,6 +180,8 @@ if __name__ == '__main__':
 
 	draw_line_posdist_meaning_langs_precalc_panels(word_groups,legends,sent_len,posdist_density_databases,save_path)
 
-	with open(save_path.joinpath(datetime.datetime.now().strftime('%Y%m%d%H%M%S')), mode='wb') as file:
+	now_time = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+	filename = save_path.joinpath(now_time+'.pkl')
+	with open(filename, mode='wb') as file:
 		pickle.dump(posdist_density_databases, file)
-	print(f'data file save at {save_path.joinpath(datetime.datetime.now().strftime('%Y%m%d%H%M%S'))}')
+	print(f'data file save at {filename}')
