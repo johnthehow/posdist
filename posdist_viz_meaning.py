@@ -180,10 +180,16 @@ if __name__ == '__main__':
 
 	posdist_density_databases = [pdd_en, pdd_de, pdd_fr, pdd_es, pdd_ru, pdd_cz]
 
-	draw_line_posdist_meaning_langs_precalc_panels(word_groups,legends,sent_len,posdist_density_databases,save_path)
+	draw_data = draw_line_posdist_meaning_langs_precalc_panels(word_groups,legends,sent_len,posdist_density_databases,save_path)
 
 	now_time = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
-	filename = save_path.joinpath(now_time+'.pkl')
+	filename = save_path.joinpath(now_time+'_data.pkl')
 	with open(filename, mode='wb') as file:
 		pickle.dump(posdist_density_databases, file)
-	print(f'data file save at {filename}')
+	print(f'data file saved at {filename}')
+
+	now_time_draw = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+	filename_draw = save_path.joinpath(now_time_draw+'_imagedata.pkl')
+	with open(filename_draw, mode='wb') as file:
+		pickle.dump(draw_data, file)
+	print(f'imagedata file saved at {filename_draw}')
