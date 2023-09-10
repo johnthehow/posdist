@@ -93,15 +93,21 @@ def draw_line_posdist_word_len_years_panels(rows,cols,sent_length,words,titles,c
 
 	now = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
 	plt.savefig(f'D:/{now}.{img_fmt}',format=img_fmt)
+	print(f'image saved at D:/{now}.{img_fmt}')
 	return image_data_container
 
 if __name__ == '__main__':
 	# plt.rcParams["font.sans-serif"]=["SimHei"]
 	# plt.rcParams["axes.unicode_minus"] = False
-	sent_len = int(input('Sentence length: '))
-	corpora_dir_en = Path(input('Path for English pickle corpora: '))
-	corpora_dir_de = Path(input('Path for German pickle corpora: '))
-	corpora_dir_es = Path(input('Path for Spanish pickle corpora: '))
+	
+	# sent_len = int(input('Sentence length: '))
+	sent_len = 20
+	# corpora_dir_en = Path(input('Path for English pickle corpora: '))
+	corpora_dir_en = r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\EN\CODENRES\RES\YEAR'
+	# corpora_dir_de = Path(input('Path for German pickle corpora: '))
+	corpora_dir_de = r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\DE\CODENRES\RES\YEAR'
+	# corpora_dir_es = Path(input('Path for Spanish pickle corpora: '))
+	corpora_dir_es = r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\ES\CODENRES\RES\YEAR'
 
 	filelist_en = os.listdir(corpora_dir_en)
 	filelist_de = os.listdir(corpora_dir_de)
@@ -135,18 +141,26 @@ if __name__ == '__main__':
 
 	year_avail = [year_avail_en,year_avail_de,year_avail_es]
 
-	year_selected_en = input('Enter four years among available years of English (separated by space): ').split()
-	year_selected_en = [int(i) for i in year_selected_en]
-	year_selected_de = input('Enter four years among available years of German (separated by space): ').split()
-	year_selected_de = [int(i) for i in year_selected_de]
-	year_selected_es = input('Enter four years among available years of Spanish (separated by space): ').split()
-	year_selected_es = [int(i) for i in year_selected_es]
+	# year_selected_en = input('Enter four years among available years of English (separated by space): ').split()
+	# year_selected_en = [int(i) for i in year_selected_en]
+	year_selected_en = [2005, 2009, 2013, 2017]
+
+	# year_selected_de = input('Enter four years among available years of German (separated by space): ').split()
+	# year_selected_de = [int(i) for i in year_selected_de]
+	year_selected_de = [2007, 2011, 2015, 2019]
+
+	# year_selected_es = input('Enter four years among available years of Spanish (separated by space): ').split()
+	# year_selected_es = [int(i) for i in year_selected_es]
+	year_selected_es = [2008, 2012, 2016, 2020]
 
 	year_selected = [year_selected_en,year_selected_de,year_selected_es]
 
-	word_en = input('A English function word: ')
-	word_de = input('A German function word: ')
-	word_es = input('A Spanish function word: ')
+	# word_en = input('A English function word: ')
+	word_en = 'but'
+	# word_de = input('A German function word: ')
+	word_de = 'auf'
+	# word_es = input('A Spanish function word: ')
+	word_es = 'los'
 
 	words = [word_en, word_de, word_es]
 
