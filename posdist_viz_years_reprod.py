@@ -103,11 +103,11 @@ if __name__ == '__main__':
 	# sent_len = int(input('Sentence length: '))
 	sent_len = 20
 	# corpora_dir_en = Path(input('Path for English pickle corpora: '))
-	corpora_dir_en = r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\EN\CODENRES\RES\YEAR'
+	corpora_dir_en = Path(r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\EN\CODENRES\RES\YEAR')
 	# corpora_dir_de = Path(input('Path for German pickle corpora: '))
-	corpora_dir_de = r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\DE\CODENRES\RES\YEAR'
+	corpora_dir_de = Path(r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\DE\CODENRES\RES\YEAR')
 	# corpora_dir_es = Path(input('Path for Spanish pickle corpora: '))
-	corpora_dir_es = r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\ES\CODENRES\RES\YEAR'
+	corpora_dir_es = Path(r'D:\thehow\TERMS\3\POSDIST\CORPUS\2_CORPUS\ES\CODENRES\RES\YEAR')
 
 	filelist_en = os.listdir(corpora_dir_en)
 	filelist_de = os.listdir(corpora_dir_de)
