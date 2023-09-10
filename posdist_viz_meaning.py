@@ -114,7 +114,8 @@ def precalc_posdist_vwords_vlens_log(wordlist,corpus,start_len,end_len):
 def draw_line_posdist_meaning_langs_precalc_panels(wordlists,legends,sent_length,corpora_databases, save_path):
 	fig = plt.figure(figsize = (16,14),dpi=300)
 	axes = fig.subplots(2,2).flatten()
-	image_data_container = [[None]*6]*4
+	image_data_container = dict()
+	image_data_container = image_data_container.fromkeys([0,1,2,3],[])
 	axes_cnt = 0
 	for wordlist in wordlists: # wordlists: [[and, und, et], [or, oder, ou], ...]
 		markers = iter(['+', 'x', 'D', 's', 'o', '^', 'v'])
@@ -126,7 +127,7 @@ def draw_line_posdist_meaning_langs_precalc_panels(wordlists,legends,sent_length
 			xticks = [i for i in range(1,sent_length+1)]
 			# axes[axes_cnt].plot(xs,ys)
 			image_data = axes[axes_cnt].plot(xs,ys,label=legends[axes_cnt][word_cnt],marker=next(markers), fillstyle='none', linewidth=1, linestyle=(0,(7,next(linestyle_cnt))))
-			image_data_container[axes_cnt][word_cnt] = image_data
+			image_data_container[axes_cnt].append(image_data[0])
 			axes[axes_cnt].legend(title='word')
 			word_cnt += 1
 		axes[axes_cnt].set_xticks(xticks)
