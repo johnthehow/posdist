@@ -179,3 +179,7 @@ if __name__ == '__main__':
 	posdist_density_databases = [pdd_en, pdd_de, pdd_fr, pdd_es, pdd_ru, pdd_cz]
 
 	draw_line_posdist_meaning_langs_precalc_panels(word_groups,legends,sent_len,posdist_density_databases,save_path)
+
+	with open(save_path.joinpath(datetime.datetime.now().strftime('%Y%m%d%H%M%S')), mode='wb') as file:
+		pickle.dump(posdist_density_databases, file)
+	print(f'data file save at {save_path.joinpath(datetime.datetime.now().strftime('%Y%m%d%H%M%S'))}')
