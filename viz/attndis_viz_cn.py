@@ -160,7 +160,7 @@ def posprobe_viz(word,lay,head,picklepath,savepath):
 		ax.plot([i for i in range(1,xlen+2)], pkm, label=str(xlen), marker=next(markers), fillstyle='none', linewidth=1, linestyle=(0,(7,next(linestyle_cnt))))
 	ax.set_xticks([i for i in range(1,37)])
 	ax.set_xticklabels([i for i in range(1,37)],rotation='vertical')
-	ax.set_xlabel('句中线性位置')
+	ax.set_xlabel('目标词句中线性位置')
 	ax.set_ylabel('平均注意力值')
 	ax.legend(title = '句长')
 	plt.title(f'功能词: {word} (英语), 注意力头 {lay:02d}-{head:02d}')
