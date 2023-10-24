@@ -1,8 +1,11 @@
 import pickle
 import matplotlib.pyplot as plt
 
+plt.rcParams["font.sans-serif"]=["SimHei"]
+plt.rcParams["axes.unicode_minus"]=False
+
 words = ['and', 'für', 'les', 'pero', 'на', 'nebo']
-langs = ['English','German','French','Spanish','Russian','Czech']
+langs = ['英语','德语','法语','西班牙语','俄语','捷克语']
 lens = [12, 16, 20, 24, 28, 32, 36]
 
 density_database_paths = [
@@ -36,9 +39,9 @@ for img in range(6):
 		axes[img].set_xticks(range(1,37))
 		axes[img].set_xticklabels(range(1,37), rotation='vertical')
 		axes[img].tick_params(labelsize=16)
-		axes[img].set_xlabel('linear position in sentence', fontsize=18)
-		axes[img].set_ylabel('probability', fontsize=18)
+		axes[img].set_xlabel('目标词句中线性位置', fontsize=18)
+		axes[img].set_ylabel('概率', fontsize=18)
 		axes[img].text(0.5, 0.95, f'{words[img]}\n({langs[img]})', horizontalalignment='center',transform=axes[img].transAxes, fontsize=14, verticalalignment='top', bbox=props)
-	axes[img].legend(title='Sent Len', fontsize=17, title_fontsize=17)
-plt.savefig('../images/length_stable_cn.png',format='png')
+	axes[img].legend(title='句长', fontsize=17, title_fontsize=17)
+plt.savefig('../images/length_stable.png',format='png')
 plt.close()
