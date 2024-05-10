@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args":["zh","C:\\Program Files\\Python37\\Lib\\site-packages\\thehow\\posdist\\zho\\io\\ZH\\UNPC\\UNPC_FULL\\clean", "clean", "D:\\functors.txt"]
+            // "args":["D:\\test\\wordfreq.txt", "4", "100"]
+            // "args":["D:\\container.hdf5", "C:\\Program Files\\Python37\\Lib/site-packages\\thehow\\posdist\\zho\\io\\ZH\\zh.wordlist", "D:\\test\\image"]
+        }
+    ]
+}
