@@ -1,19 +1,25 @@
-# 汉语位频分布研究
+# 汉语日语位频分布研究
 
-## 概况
-* 链式项目结构, 一个脚本的输出作为另一个脚本的输入
-* 逐脚本运行
-* 使用多进程分发器(thehow.snips.multiproc.feeder_processor), 在多核心CPU上能极大提高运行效率
-* main.py和config.py没有实际作用(并不是星型项目结构)
+## Usage
+1. edit config.py
+2. python pipeline.py
 
-## 实验步骤
-* 确定中文语料库 UNPC / Leipzig
-* 最佳为双语平行语料库, 因为分句合理 (UNPC)
-* 确定待研究目标词 wordlist.txt
-* 部署多进程分发器 feeder_processor.py
-* 切分语料库 lib_spliter.py
-* 多进程清理中文文本 lib_cleaner_un.py / lib_cleaner_leipzig.py
-* 多进程中文文本分词 lib_tokenize.py
-* 多进程统计词位频分布 lib_word_posdist.py / lib_char_posdist.py
-* 合并多进程位频分布结果 lib_merge_hdf5.py
-* 可视化位频分布结果 lib_vis_posdist.py / lib_vis_posdist_extlink.py
+## Dependancy
+1. cygwin
+1. git-bash
+1. paste
+1. sed
+1. split (v8.3+)
+1. dos2unix
+1. pypinyin
+2. pykakasi 
+
+## Comment
+1. 输入语料库必须是一行一句型
+1. 输入词表必须是一行一词型
+1. 在config.py中编辑配置之后才能运行pipeline.py
+1. pipeline.py集中调用libs中的脚本
+1. libs中的脚本在手动输入参数的情况下能够独立运行
+1. utils中的脚本独立运行, 用于语料库去重, 查错等任务
+1. pipeline.py中可通过注释的方法选择单独运行某些任务, 前提是之前的任务都执行过
+1. 每个libs中的脚本都会产生新的输入, 作为下一个步骤的输入
