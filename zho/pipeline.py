@@ -31,7 +31,7 @@
     **) 罗马字可视化文件名
 '''
 from config import *
-from libs import spliter, cleaner, sortuniq, tokenize_postag, tokenpos2token, lineword_stat, word_freq, functor_freq, word_sentlen_dist, word_posdist, vis_posdist, romanize
+from src import spliter, cleaner, sortuniq, tokenize_postag, tokenpos2token, lineword_stat, word_freq, functor_freq, word_sentlen_dist, word_posdist, vis_posdist, romanize
 from pathlib import Path
 import glob
 import subprocess
